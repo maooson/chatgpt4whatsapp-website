@@ -3,6 +3,7 @@ import Container from "@components/container.astro";
 import Link from "@components/ui/link.astro";
 import Dropdown from "./dropdown.astro";
 import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
+const pathname = Astro.url.pathname;
 
 const menuitems = [
   {
@@ -41,7 +42,7 @@ const menuitems = [
 ---
 
 <Container>
-  <header class="sticky top-3 z-50 rounded-2xl border border-[var(--line-soft)] bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/75 px-4 py-3 flex flex-col lg:flex-row justify-between items-center my-5 shadow-sm">
+  <header class="sticky top-3 z-50 rounded-2xl border border-pink-200/70 bg-gradient-to-r from-white via-[var(--brand-50)] to-green-50/70 backdrop-blur supports-[backdrop-filter]:bg-white/80 px-4 py-3 flex flex-col lg:flex-row justify-between items-center my-5 shadow-sm shadow-pink-100/70">
     <Astronav>
       <div class="flex w-full lg:w-auto items-center justify-between">
         <a href="/" class="text-lg"
@@ -54,8 +55,8 @@ const menuitems = [
           <MenuIcon class="w-4 h-4 text-gray-800" />
         </div>
       </div>
-      <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0">
-        <ul class="flex flex-col lg:flex-row lg:gap-3">
+      <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0 lg:items-center lg:gap-2">
+        <ul class="flex flex-col lg:flex-row lg:gap-1">
           {
             menuitems.map((item, index) => (
               <>
@@ -71,7 +72,12 @@ const menuitems = [
                   <li>
                     <a
                       href={item.path}
-                      class="flex lg:px-3 py-2 text-gray-900 hover:text-pink-500 active:text-pink-500 font-medium">
+                      class:list={[
+                        "flex lg:px-3 py-2 rounded-lg font-medium transition",
+                        pathname === item.path
+                          ? "text-pink-700 bg-pink-100"
+                          : "text-gray-800 hover:text-pink-600 hover:bg-pink-50",
+                      ]}>
                       {item.title}
                     </a>
                   </li>
@@ -80,17 +86,15 @@ const menuitems = [
             ))
           }
         </ul>
-        <!-- <div class="lg:hidden flex items-center mt-3 gap-4">
-          <Link href="#" style="muted" block size="md">Log in</Link>
-          <Link href="#" size="md" block>Sign up</Link>
-        </div> -->
+        <Link
+          href="/pricing"
+          data-cta="nav_get_started"
+          data-location="navbar"
+          class="mt-2 lg:mt-0 bg-gradient-to-r from-pink-600 to-pink-500 text-white hover:from-pink-700 hover:to-pink-600 rounded-xl font-semibold px-4 py-2"
+        >
+          Get Started
+        </Link>
       </MenuItems>
     </Astronav>
-    <!-- <div>
-      <div class="hidden lg:flex items-center gap-4">
-        <a href="#">Log in</a>
-        <Link href="#" size="md">Sign up</Link>
-      </div>
-    </div> -->
   </header>
 </Container>
