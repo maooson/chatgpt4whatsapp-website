@@ -1,48 +1,64 @@
 ---
-// @ts-ignore
 import { Icon } from "astro-icon";
 
 const features = [
   {
-    title: "Easy Integration",
+    title: "Instant Reply Drafting",
     description:
-      "No coding knowledge is required to easily integrate ChatGPT into your favorite social platform and start chatting.",
-    icon: "bx:bxs-stopwatch",
+      "Generate first-draft responses directly in WhatsApp Web, then edit before sending.",
+    icon: "mdi:chat-processing",
   },
   {
-    title: "Fast Responses",
+    title: "Tone and Style Control",
     description:
-      "Experience swift and precise ChatGPT replies, enhancing communication and productivity.",
-    icon: "bx:bxs-chat",
+      "Switch between professional, friendly, concise, or persuasive response styles in one click.",
+    icon: "mdi:tune-variant",
   },
   {
-    title: "Customizable",
+    title: "Troubleshooting Built In",
     description:
-      "You can customize the responses to your messages to better meet your needs and preferences.",
-    icon: "bx:bxs-pen",
+      "Recover fast from common auth and rate-limit errors with guided fixes and playbooks.",
+    icon: "mdi:shield-check",
+  },
+  {
+    title: "Prompt Preset System",
+    description:
+      "Save reusable prompt templates so your team keeps consistent communication quality.",
+    icon: "mdi:bookmark-multiple",
+  },
+  {
+    title: "Workflow Ready",
+    description:
+      "Works for support, sales, follow-up, and operations workflows without custom code.",
+    icon: "mdi:source-branch",
+  },
+  {
+    title: "Conversion Tracking",
+    description:
+      "Track CTA and tool interactions to improve landing-page performance with real data.",
+    icon: "mdi:chart-line",
   },
 ];
 ---
 
-<div class="mt-16 md:mt-0">
-  <h2
-    class="mt-16 text-2xl lg:text-3xl font-bold lg:tracking-tight text-pink-500 text-center">
-    A Powerful ChatGPT Extension
-  </h2>
-</div>
+<section class="mt-20">
+  <div class="text-center max-w-3xl mx-auto">
+    <p class="text-xs uppercase tracking-[0.18em] text-pink-600 font-semibold">Solution</p>
+    <h2 class="mt-3 text-3xl lg:text-4xl font-bold tracking-tight text-gray-900">Everything You Need for AI-Assisted WhatsApp Messaging</h2>
+    <p class="mt-4 text-gray-600">Designed for users who want faster replies and teams who need repeatable quality.</p>
+  </div>
 
-<div class="grid sm:grid-cols-2 md:grid-cols-3 mt-16 gap-4">
-  {
-    features.map((item) => (
-      <div class="flex gap-4 items-start bg-pink-100 p-6 rounded-lg">
-        <div class="mt-1 bg-pink-500 rounded-full p-2 w-8 h-8 shrink-0">
-          <Icon class="text-white" name={item.icon} />
-        </div>
-        <div>
-          <h3 class="font-semibold text-lg text-pink-500">{item.title}</h3>{" "}
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 mt-10 gap-4">
+    {
+      features.map((item) => (
+        <div class="rounded-2xl border border-[var(--line-soft)] bg-white p-6 shadow-sm hover:shadow-md transition">
+          <div class="w-11 h-11 rounded-xl bg-[var(--brand-50)] border border-[var(--line-soft)] flex items-center justify-center">
+            <Icon class="text-pink-600 w-6 h-6" name={item.icon} />
+          </div>
+          <h3 class="font-semibold text-lg text-gray-900 mt-4">{item.title}</h3>
           <p class="mt-2 leading-relaxed text-gray-600">{item.description}</p>
         </div>
-      </div>
-    ))
-  }
-</div>
+      ))
+    }
+  </div>
+</section>

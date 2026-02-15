@@ -1,83 +1,64 @@
 ---
-// @ts-ignore
-import { Icon } from "astro-icon";
-
 const faqItems = [
   {
-    question: "1. What is ChatGPT For Social?",
+    question: "What is ChatGPT for WhatsApp?",
     answer:
-      "The ChatGPT for Social is an extension that allows you to integrate ChatGPT with your favorite conversations. It enables you to receive AI-generated responses to your messages, making your conversations more engaging and productive.",
-    link: "../blog/getting-started",
+      "It is a browser extension that helps you draft and improve WhatsApp Web replies using AI.",
+    link: "/blog/getting-started",
   },
   {
-    question: "2. How to install the extension?",
+    question: "How long does setup take?",
     answer:
-      "First install ChatGPT For WhatsApp from the Chrome Store. Then, open the WhatsApp Web page and log in. Click the extension and check the status. Once the connection is established, you can start a conversation with ChatGPT in WhatsApp.",
-    link: "../blog/getting-started",
+      "Most users complete setup in about 10 minutes if WhatsApp Web and AI login are already available.",
+    link: "/blog/getting-started",
   },
   {
-    question: "3. How to use the extension?",
+    question: "What if the assistant does not respond?",
     answer:
-      " You can use like this: @botname hello ",
-    link: "../blog/advanced-guide",
+      "Check extension status, login session, and message format first. Then run through the troubleshooting list.",
+    link: "/blog/error-list",
   },
   {
-    question: "4. Why is there no response when I @ the bot?",
+    question: "Can I use this for team workflows?",
     answer:
-      "If you don't receive a response from ChatGPT, please check if the message is at least two words long. Also, make sure you are logged in to both the WhatsApp Web page and your ChatGPT account. If the problem persists, try reinstalling the plugin or contact customer support.",
-    link: "../blog/getting-started",
+      "Yes. Teams commonly use tone presets and prompt templates for support, sales, and follow-up operations.",
+    link: "/blog/advanced-guide",
   },
   {
-    question: "5. Why are the message responses slow?",
+    question: "How do I compare plans before buying?",
     answer:
-      "Slow message responses could be due to several factors, such as high server load, network issues, or limitations with the free version of the service. You can try refreshing your browser or logging out and logging back in to see if the issue resolves. Upgrading to a professional plan may also improve response times.",
-    link: "../blog/getting-started",
+      "Review usage limits and feature controls on the pricing page, then map them to your daily message volume.",
+    link: "/pricing",
   },
   {
-    question:
-      "6. What should I do if I get an error while using the extension?",
+    question: "Is there a free way to test output quality first?",
     answer:
-      "The error is returned by OpenAI. You can check the [ error code ] table in our blog to investigate the cause of the issue and resolve the error. If you are still unable to resolve it, please add our team's contact information to get assistance.",
-    link: "../blog/error-list",
+      "Yes. Use the free WhatsApp Reply Generator to test different tones and response lengths before upgrading.",
+    link: "/tools/whatsapp-reply-generator",
   },
-  // {
-  //   question: "6. How to become a professional user?",
-  //   answer:
-  //     "The Professional Plan provides an array of advantages, including the ability to predefine prompts, customize the bot's identity, characteristics, and rules, as well as adjust the number of conversations. Additionally, the plan offers faster response times, priority support, and access to exclusive features. Check the pricing page for more information on the available plans and their benefits."
-  // },
 ];
 ---
 
-<div class="mt-16 md:mt-0">
-  <h2
-    class="mt-16 text-xl lg:text-3xl font-bold lg:tracking-tight text-gray-900 text-center">
-    FAQ
-  </h2>
-</div>
+<section class="mt-20">
+  <div class="text-center max-w-3xl mx-auto">
+    <p class="text-xs uppercase tracking-[0.18em] text-pink-600 font-semibold">Objections</p>
+    <h2 class="mt-3 text-3xl lg:text-4xl font-bold tracking-tight text-gray-900">Frequently Asked Questions</h2>
+  </div>
 
-<div class="grid sm:grid-cols-1 md:grid-cols-2 mt-16 gap-4">
-  {
-    faqItems.map((item) => (
-      <div class="flex gap-4 items-start">
-        <details class="w-full bg-gray-100 rounded-lg ">
-          <summary class="cursor-pointer p-4 font-bold text-gray-900 list-none">
-            {item.question}
-            <span class="float-right text-gray-900">+</span>
+  <div class="grid md:grid-cols-2 mt-10 gap-4">
+    {
+      faqItems.map((item) => (
+        <details class="group rounded-2xl border border-[var(--line-soft)] bg-white p-5 shadow-sm">
+          <summary class="cursor-pointer list-none font-semibold text-gray-900 flex items-start justify-between gap-4">
+            <span>{item.question}</span>
+            <span class="text-pink-600 group-open:rotate-45 transition">+</span>
           </summary>
-          <div class="mx-4 mb-4 text-gray-600">
-            <p>{item.answer} 
-            {item.link && (
-                <a
-                  href={item.link}
-                  class="underline inline-block mr-1 text-pink-400 hover:text-pink-500">
-                  {" "}
-                  More Details{" "}
-                </a>
-
-            )}</p>
-          </div>
+          <p class="mt-3 text-gray-600 leading-relaxed">{item.answer}</p>
+          <a href={item.link} class="mt-3 inline-block text-pink-600 font-medium hover:text-pink-700 underline">
+            Learn more
+          </a>
         </details>
-      </div>
-    ))
-  }
-</div>
+      ))
+    }
+  </div>
+</section>

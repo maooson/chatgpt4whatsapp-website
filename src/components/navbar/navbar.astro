@@ -26,6 +26,10 @@ const menuitems = [
     path: "/blog",
   },
   {
+    title: "Tools",
+    path: "/tools/whatsapp-reply-generator",
+  },
+  {
     title: "Docs",
     path: "https://docs.aoq.me",
   },
@@ -37,13 +41,13 @@ const menuitems = [
 ---
 
 <Container>
-  <header class="flex flex-col lg:flex-row justify-between items-center my-5">
+  <header class="sticky top-3 z-50 rounded-2xl border border-[var(--line-soft)] bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/75 px-4 py-3 flex flex-col lg:flex-row justify-between items-center my-5 shadow-sm">
     <Astronav>
       <div class="flex w-full lg:w-auto items-center justify-between">
         <a href="/" class="text-lg"
-          ><span class="text-gray-900">ChatGPT For </span><span
+          ><span class="text-gray-900">ChatGPT for </span><span
             class="font-bold text-pink-500">
-            Social</span
+            WhatsApp</span
           >
         </a>
         <div class="block lg:hidden">
@@ -67,7 +71,7 @@ const menuitems = [
                   <li>
                     <a
                       href={item.path}
-                      class="flex lg:px-3 py-2 text-gray-900 hover:text-pink-500 active:text-pink-500">
+                      class="flex lg:px-3 py-2 text-gray-900 hover:text-pink-500 active:text-pink-500 font-medium">
                       {item.title}
                     </a>
                   </li>

@@ -3,137 +3,139 @@ import Link from "@components/ui/link.astro";
 import { Icon } from "astro-icon";
 ---
 
-<main class="grid place-items-center mt-8 pt-16 pb-8 md:pt-12 md:pb-16">
-  <style>
-    .primary-color {
-      background-color: #ff4dbe;
-    }
-    .platform-name-container {
-      display: inline-flex;
-      position: relative;
-    }
+<section class="grid lg:grid-cols-2 gap-8 items-center pt-10 pb-6 md:pt-14 md:pb-10">
+  <div>
+    <p class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-pink-600 bg-[var(--brand-50)] border border-[var(--line-soft)] rounded-full px-3 py-1">
+      <span class="w-2 h-2 rounded-full bg-green-500"></span>
+      Built for WhatsApp Web workflows
+    </p>
 
-    .platform-name {
-      position: absolute;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-      white-space: nowrap;
-    }
+    <div class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-gray-900">
+      <span class="block">Write Better Replies</span>
+      <span class="inline-block mt-1 text-gray-700">with ChatGPT for </span>
+      <span class="inline-block mt-1 relative min-w-[180px]">
+        <span id="dynamic-text-0" class="platform-name visible">WhatsApp</span>
+        <span id="dynamic-text-1" class="platform-name">Support</span>
+        <span id="dynamic-text-2" class="platform-name">Sales</span>
+        <span id="dynamic-text-3" class="platform-name">Team Ops</span>
+      </span>
+    </div>
 
-    .platform-name.visible {
-      opacity: 1;
-    }
-    .tag {
-      position: absolute;
-      top: 0;
-      left: 10;
-      font-size: 0.6rem;
-      border-radius: 4px;
-      margin-top: -10px;
-    }
-  </style>
+    <p class="text-lg mt-6 text-gray-700 max-w-2xl">
+      Draft, rewrite, and translate messages inside WhatsApp Web.
+      Ship faster conversations with better consistency and less manual typing.
+    </p>
 
-  <div
-    class="heading-container grid grid-cols-2 md:grid-cols-2 items-center gap-x-4 md:mt-8 text-2xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-6xl font-bold xl:tracking-tighter w-full md:w-auto">
-    <div class="text-gray-600 text-right">ChatGPT For</div>
-    <div class="platform-name-container">
-      <div id="dynamic-text-0" class="text-gray-600 -ml-10">&nbsp;</div>
-      <div id="dynamic-text-1" class="platform-name">Social</div>
-      <div id="dynamic-text-2" class="platform-name">
-        WhatsApp <button
-          class="text-xs tag px-1 bg-green-600 rounded-sm text-white font-thin"
-          >published</button
-        >
-      </div>
-      <div id="dynamic-text-3" class="platform-name">
-        Telegram <button
-          class="text-xs tag px-1 primary-color rounded-sm text-white font-thin"
-          >coming</button
-        >
-      </div>
-      <div id="dynamic-text-4" class="platform-name">
-        Wechat <button
-          class="text-xs tag px-1 bg-green-600 rounded-sm text-white font-thin"
-          >published</button
-        >
-      </div>
-      <div id="dynamic-text-5" class="platform-name">
-        Line <button
-          class="text-xs tag px-1 primary-color rounded-sm text-white font-thin">
-          waiting</button
-        >
-      </div>
-      <div id="dynamic-text-6" class="platform-name">
-        Twitter <button
-          class="text-xs tag px-1 primary-color rounded-sm text-white font-thin"
-          >waiting</button
-        >
-      </div>
+    <div class="mt-8 flex flex-col sm:flex-row gap-3">
+      <Link
+        href="https://chrome.google.com/webstore/detail/chatgpt-for-whatsapp/ajlcjjeepijhfbgkciegfdoklpcpmipk"
+        data-cta="hero_add_to_chrome"
+        data-location="hero"
+        target="_blank"
+        class="flex gap-2 items-center justify-center bg-pink-600 hover:bg-pink-700 rounded-xl text-white font-semibold"
+        rel="noopener">
+        <Icon class="text-white w-5 h-5" name="bx:bxl-chrome" />
+        Add to Chrome
+      </Link>
+
+      <Link
+        size="lg"
+        rel="noopener"
+        href="/tools/whatsapp-reply-generator"
+        data-cta="hero_try_free_tool"
+        data-location="hero"
+        class="flex gap-2 items-center justify-center bg-white border border-[var(--line-soft)] text-gray-900 rounded-xl hover:bg-[var(--brand-50)] font-semibold">
+        <Icon class="text-pink-600 w-5 h-5" name="bx:bxs-magic-wand" />
+        Try Free Tool
+      </Link>
+
+      <Link
+        size="lg"
+        rel="noopener"
+        href="https://aow.me/try?utm_source=site&utm_medium=hero&utm_campaign=live_demo"
+        data-cta="hero_live_demo"
+        data-location="hero"
+        class="flex gap-2 items-center justify-center bg-green-50 text-gray-900 rounded-xl hover:bg-green-100 border border-green-200 font-semibold"
+        target="_blank">
+        Live Demo
+      </Link>
+    </div>
+
+    <div class="mt-6 flex flex-wrap gap-2 text-sm text-gray-700">
+      <span class="px-3 py-1 rounded-full border border-[var(--line-soft)] bg-white">No code setup</span>
+      <span class="px-3 py-1 rounded-full border border-[var(--line-soft)] bg-white">Prompt presets</span>
+      <span class="px-3 py-1 rounded-full border border-[var(--line-soft)] bg-white">Team-ready workflow</span>
     </div>
   </div>
 
-  <p class="text-lg text-center mt-8 text-gray-900 max-w-xl">
-    Integrate ChatGPT into your favorite social platform and take your
-    conversations to the next level.
-  </p>
-  <div class="mt-8 flex flex-col sm:flex-row gap-4">
-    <Link
-      href="#"
-      href="https://chrome.google.com/webstore/detail/chatgpt-for-whatsapp/ajlcjjeepijhfbgkciegfdoklpcpmipk"
-      target="_blank"
-      class="flex gap-1 items-center justify-center bg-pink-500 hover:bg-pink-600 rounded-lg text-white"
-      rel="noopener">
-      <Icon class="text-white w-5 h-5" name="bx:bxl-chrome" />
-      Add to Chrome
-    </Link>
-    <Link
-      size="lg"
-      rel="noopener"
-      href="https://aow.me/chatgpt4whatsapp_download"
-      class="flex gap-1 items-center justify-center bg-pink-100 text-pink-500 rounded-lg hover:bg-pink-200"
-      target="_blank">
-      <Icon class="text-pink-500 w-5 h-5" name="bx:bxs-cloud-download" />
-      Download For Free
-    </Link>
-    <Link
-      size="lg"
-      rel="noopener"
-      href="https://aow.me/try"
-      class="flex gap-1 items-center justify-center bg-green-100 text-gray-900 rounded-lg hover:bg-green-200"
-      target="_blank">
-      Try Chatbot
-    </Link>
+  <div class="bg-white border border-[var(--line-soft)] rounded-2xl shadow-sm p-5 sm:p-6">
+    <p class="text-xs uppercase tracking-[0.16em] text-pink-600 font-semibold">Why teams switch</p>
+    <ul class="mt-4 space-y-3">
+      <li class="flex items-start gap-3">
+        <Icon name="mdi:check-circle" class="w-5 h-5 text-green-500 mt-0.5" />
+        <div>
+          <p class="font-semibold text-gray-900">Faster response drafting</p>
+          <p class="text-sm text-gray-600">Turn rough ideas into polished replies in seconds.</p>
+        </div>
+      </li>
+      <li class="flex items-start gap-3">
+        <Icon name="mdi:check-circle" class="w-5 h-5 text-green-500 mt-0.5" />
+        <div>
+          <p class="font-semibold text-gray-900">Consistent brand voice</p>
+          <p class="text-sm text-gray-600">Use tone presets so every message sounds intentional.</p>
+        </div>
+      </li>
+      <li class="flex items-start gap-3">
+        <Icon name="mdi:check-circle" class="w-5 h-5 text-green-500 mt-0.5" />
+        <div>
+          <p class="font-semibold text-gray-900">Lower repetitive workload</p>
+          <p class="text-sm text-gray-600">Automate repetitive phrasing and focus on high-value conversations.</p>
+        </div>
+      </li>
+    </ul>
+
+    <div class="mt-6 grid grid-cols-3 gap-3">
+      <div class="rounded-xl bg-[var(--brand-50)] border border-[var(--line-soft)] p-3 text-center">
+        <p class="text-xl font-bold text-pink-600">3x</p>
+        <p class="text-xs text-gray-600">faster drafts</p>
+      </div>
+      <div class="rounded-xl bg-[var(--brand-50)] border border-[var(--line-soft)] p-3 text-center">
+        <p class="text-xl font-bold text-pink-600">10m</p>
+        <p class="text-xs text-gray-600">quick setup</p>
+      </div>
+      <div class="rounded-xl bg-[var(--brand-50)] border border-[var(--line-soft)] p-3 text-center">
+        <p class="text-xl font-bold text-pink-600">24/7</p>
+        <p class="text-xs text-gray-600">assist mode</p>
+      </div>
+    </div>
   </div>
-</main>
+</section>
+
+<style>
+  .platform-name {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    color: #e13ca5;
+  }
+
+  .platform-name.visible {
+    opacity: 1;
+    position: relative;
+  }
+</style>
 
 <script>
-  const platformNames = [
-    "For",
-    "Social",
-    "WhatsApp",
-    "Telegram",
-    "Wechat",
-    "Line",
-    "Twitter",
-  ];
-  const colors = [
-    "#4B5563",
-    "#ff4dbe",
-    "#25D366",
-    "#0088cc",
-    "#07C160",
-    "#00C300",
-    "#1DA1F2",
-  ];
   let currentIndex = 0;
+  const words = ["WhatsApp", "Support", "Sales", "Team Ops"];
 
   setInterval(() => {
-    document
-      .getElementById(`dynamic-text-${currentIndex}`)
-      .classList.remove("visible");
-    currentIndex = (currentIndex + 1) % platformNames.length;
-    const nextElement = document.getElementById(`dynamic-text-${currentIndex}`);
-    nextElement.classList.add("visible");
-    nextElement.style.color = colors[currentIndex];
-  }, 2000);
+    const currentEl = document.getElementById(`dynamic-text-${currentIndex}`);
+    if (currentEl) currentEl.classList.remove("visible");
+
+    currentIndex = (currentIndex + 1) % words.length;
+
+    const nextEl = document.getElementById(`dynamic-text-${currentIndex}`);
+    if (nextEl) nextEl.classList.add("visible");
+  }, 2200);
 </script>

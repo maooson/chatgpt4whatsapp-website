@@ -6,6 +6,7 @@ import "@fontsource/inter/variable.css";
 
 export interface Props {
   title: string;
+  description?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
@@ -15,11 +16,27 @@ const resolvedImageWithDomain = new URL(
   Astro.site
 ).toString();
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 
 const makeTitle = title
-  ? title + " | " + "ChatGPT For Wechat"
-  : "ChatGPT For Social - Integrate ChatGPT into your favorite social platform";
+  ? `${title} | ChatGPT for WhatsApp`
+  : "ChatGPT for WhatsApp Web Extension";
+const ogTitle = title
+  ? `${title} - ChatGPT for WhatsApp`
+  : "ChatGPT for WhatsApp";
+const makeDescription =
+  description ??
+  "Use ChatGPT directly in WhatsApp Web. Draft faster replies, translate messages, and automate routine conversations.";
+const keywords = [
+  "chatgpt for whatsapp",
+  "whatsapp ai assistant",
+  "chatgpt extension",
+  "ai agent",
+  "agent",
+  "openclaw",
+  "whatsapp automation",
+  "reply generator",
+].join(", ");
 ---
 
 <!DOCTYPE html>
@@ -27,24 +44,25 @@ const makeTitle = title
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <meta name="keywords" content={keywords} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
     <!-- <link rel="preload" as="image" href={src} alt="Hero" /> -->
     <SEO
-      title="ChatGPT For Social - Integrate ChatGPT into your favorite social platform"
-      description="ChatGPT For Social is a extension that allows you to integrate ChatGPT into your WhatsApp conversations. Get quick and accurate responses to your messages with ChatGPT!"
+      title={makeTitle}
+      description={makeDescription}
       canonical={canonicalURL}
       twitter={{
         creator: "@AIFunFace",
-        site: "https://as-notion.vercel.com",
+        site: "https://aoq.me",
         card: "summary_large_image",
       }}
       openGraph={{
         basic: {
           url: canonicalURL,
           type: "website",
-          title: "Integrate ChatGPT with WhatsApp using our extension",
+          title: ogTitle,
           image: resolvedImageWithDomain,
         },
         image: {
@@ -69,10 +87,65 @@ const makeTitle = title
   </head>
   <body>
     <amp-auto-ads type="adsense" data-ad-client="ca-pub-5874636604758542"></amp-auto-ads>
+    <div class="site-bg"></div>
     <Navbar />
-    <slot />
+    <main>
+      <slot />
+    </main>
     <Footer />
+    <script is:inline>
+      document.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+        const ctaEl = target.closest("a[data-cta],button[data-cta]");
+        if (!ctaEl) return;
+
+        const ctaName = ctaEl.getAttribute("data-cta") || "unknown_cta";
+        const ctaLocation = ctaEl.getAttribute("data-location") || "unknown";
+        const href = ctaEl.getAttribute("href") || "";
+
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "cta_click", {
+            cta_name: ctaName,
+            cta_location: ctaLocation,
+            cta_href: href,
+          });
+        }
+      });
+    </script>
     <style is:global>
+      :root {
+        --brand-50: #fff4fb;
+        --brand-100: #ffe6f6;
+        --brand-500: #e13ca5;
+        --brand-600: #bf2e8b;
+        --ink-900: #111827;
+        --ink-700: #374151;
+        --line-soft: #f1e4ed;
+        --card-bg: #ffffff;
+      }
+
+      html,
+      body {
+        background: radial-gradient(1200px 480px at 70% -10%, var(--brand-100), #ffffff 60%);
+        color: var(--ink-900);
+      }
+
+      main {
+        position: relative;
+        z-index: 1;
+      }
+
+      .site-bg {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background-image:
+          radial-gradient(circle at 12% 18%, rgba(225, 60, 165, 0.08), transparent 24%),
+          radial-gradient(circle at 88% 34%, rgba(37, 211, 102, 0.07), transparent 22%);
+      }
+
       /* Improve Page speed */
       /* https://css-tricks.com/almanac/properties/c/content-visibility/ */
       img {

@@ -3,6 +3,13 @@ import { Tick } from "@components/ui/icons";
 import Link from "@components/ui/link.astro";
 
 const { plan } = Astro.props;
+const buttonLink = plan.button.link || "#";
+const ctaLink =
+  buttonLink === "#"
+    ? "#"
+    : buttonLink.includes("?")
+      ? `${buttonLink}&utm_source=site&utm_medium=pricing&utm_campaign=${plan.name.toLowerCase()}`
+      : `${buttonLink}?utm_source=site&utm_medium=pricing&utm_campaign=${plan.name.toLowerCase()}`;
 ---
 
 <div>
@@ -41,7 +48,11 @@ const { plan } = Astro.props;
     </ul>
     <div class="flex mt-8 justify-center mb-4">
       <Link
-        href={plan.button.link || "#"}
+        href={ctaLink || "#"}
+        data-cta={`pricing_${plan.name.toLowerCase()}_click`}
+        data-location="pricing"
+        rel="noopener"
+        target="_blank"
         class={`py-2 px-4 rounded-lg focus:outline-none ${
           plan.name === "Pro"
             ? "bg-pink-500 text-white hover:bg-pink-500"

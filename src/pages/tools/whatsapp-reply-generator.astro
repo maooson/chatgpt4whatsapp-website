@@ -1,0 +1,287 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+---
+
+<Layout
+  title="Free WhatsApp Reply Generator"
+  description="Generate polished WhatsApp replies with tone presets. Free tool for drafting concise, professional, and friendly responses."
+>
+  <Container>
+    <section class="max-w-4xl mx-auto mt-12 mb-16">
+      <h1 class="text-4xl font-bold tracking-tight text-gray-900">Free WhatsApp Reply Generator</h1>
+      <p class="mt-4 text-lg text-gray-700">
+        Draft better WhatsApp messages in seconds. Paste the incoming message, choose a tone,
+        and generate a ready-to-send reply.
+      </p>
+
+      <div class="grid gap-6 mt-8">
+        <div class="grid md:grid-cols-3 gap-3">
+          <button
+            class="bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg px-4 py-2 text-sm"
+            data-template="support"
+            data-cta="tool_use_template_support"
+            data-location="tool_reply_generator"
+          >
+            Support Template
+          </button>
+          <button
+            class="bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg px-4 py-2 text-sm"
+            data-template="sales"
+            data-cta="tool_use_template_sales"
+            data-location="tool_reply_generator"
+          >
+            Sales Template
+          </button>
+          <button
+            class="bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg px-4 py-2 text-sm"
+            data-template="followup"
+            data-cta="tool_use_template_followup"
+            data-location="tool_reply_generator"
+          >
+            Follow-Up Template
+          </button>
+        </div>
+
+        <div>
+          <label for="incoming" class="block text-sm font-medium text-gray-700 mb-2">Incoming message</label>
+          <textarea
+            id="incoming"
+            class="w-full h-36 rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-300"
+            placeholder="Example: Hi, can you send the proposal before 5 PM today?"
+          ></textarea>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label for="goal" class="block text-sm font-medium text-gray-700 mb-2">Reply goal</label>
+            <input
+              id="goal"
+              type="text"
+              class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-300"
+              placeholder="Example: confirm and set expectation"
+            />
+          </div>
+          <div>
+            <label for="length" class="block text-sm font-medium text-gray-700 mb-2">Length</label>
+            <select
+              id="length"
+              class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-300"
+            >
+              <option value="short">Short</option>
+              <option value="medium" selected>Medium</option>
+              <option value="long">Long</option>
+            </select>
+          </div>
+          <div>
+            <label for="tone" class="block text-sm font-medium text-gray-700 mb-2">Tone</label>
+            <select
+              id="tone"
+              class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-300"
+            >
+              <option value="professional">Professional</option>
+              <option value="friendly">Friendly</option>
+              <option value="concise">Concise</option>
+              <option value="persuasive">Persuasive</option>
+              <option value="empathetic">Empathetic</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button
+            id="generate"
+            data-cta="tool_generate_reply"
+            data-location="tool_reply_generator"
+            class="bg-pink-500 hover:bg-pink-600 text-white rounded-lg px-5 py-2.5 font-medium"
+          >
+            Generate Reply
+          </button>
+          <button
+            id="copy"
+            data-cta="tool_copy_reply"
+            data-location="tool_reply_generator"
+            class="bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg px-5 py-2.5 font-medium"
+          >
+            Copy
+          </button>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4">
+          <div>
+            <label for="output-short" class="block text-sm font-medium text-gray-700 mb-2">Short reply</label>
+            <textarea
+              id="output-short"
+              class="w-full h-36 rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-300"
+              placeholder="Short version..."
+            ></textarea>
+          </div>
+          <div>
+            <label for="output-medium" class="block text-sm font-medium text-gray-700 mb-2">Medium reply</label>
+            <textarea
+              id="output-medium"
+              class="w-full h-36 rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-300"
+              placeholder="Medium version..."
+            ></textarea>
+          </div>
+          <div>
+            <label for="output-long" class="block text-sm font-medium text-gray-700 mb-2">Long reply</label>
+            <textarea
+              id="output-long"
+              class="w-full h-36 rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-300"
+              placeholder="Long version..."
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 rounded-lg bg-gray-50 p-5 text-sm text-gray-700">
+        Need advanced controls, team settings, and higher usage limits? See <a class="text-pink-600 hover:underline" href="/pricing">Pricing</a>.
+        If something fails during setup, open the <a class="text-pink-600 hover:underline" href="/blog/error-list">Troubleshooting Guide</a>.
+      </div>
+    </section>
+  </Container>
+</Layout>
+
+<script is:inline>
+  const incomingEl = document.getElementById("incoming");
+  const goalEl = document.getElementById("goal");
+  const lengthEl = document.getElementById("length");
+  const toneEl = document.getElementById("tone");
+  const shortEl = document.getElementById("output-short");
+  const mediumEl = document.getElementById("output-medium");
+  const longEl = document.getElementById("output-long");
+  const generateBtn = document.getElementById("generate");
+  const copyBtn = document.getElementById("copy");
+  const templateButtons = document.querySelectorAll("button[data-template]");
+
+  const openers = {
+    professional: "Thanks for the message.",
+    friendly: "Hey, thanks for reaching out!",
+    concise: "Got it.",
+    persuasive: "Great question.",
+    empathetic: "I understand where you're coming from.",
+  };
+
+  const closers = {
+    professional: "Let me know if you'd like me to adjust anything.",
+    friendly: "Happy to help further if needed.",
+    concise: "Let me know if that works.",
+    persuasive: "If that sounds good, I can proceed now.",
+    empathetic: "If you'd like, I can help with the next step too.",
+  };
+
+  const templates = {
+    support: {
+      incoming: "Hi, I still have not received my order. Can you check?",
+      goal: "acknowledge and provide a clear next action with timeline",
+      tone: "empathetic",
+      length: "medium",
+    },
+    sales: {
+      incoming: "Can you share pricing details and what is included?",
+      goal: "qualify intent and suggest the best next step",
+      tone: "professional",
+      length: "short",
+    },
+    followup: {
+      incoming: "Just checking in on the proposal I sent last week.",
+      goal: "follow up politely and request a clear decision timeline",
+      tone: "friendly",
+      length: "short",
+    },
+  };
+
+  const buildReply = (incoming, goal, tone, size) => {
+    const baseGoal = goal ? `My goal is to ${goal}.` : "My goal is to respond clearly and helpfully.";
+    const opener = openers[tone] || openers.professional;
+    const closer = closers[tone] || closers.professional;
+    const core = `Regarding your message: \"${incoming}\".`;
+
+    if (size === "short") {
+      return `${opener} ${core}`;
+    }
+    if (size === "long") {
+      return `${opener} ${baseGoal} I understand the context and will keep this practical. ${core} Here is the next best step: I can confirm details and proceed immediately once you approve. ${closer}`;
+    }
+    return `${opener} ${baseGoal} ${core} ${closer}`;
+  };
+
+  templateButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const key = button.getAttribute("data-template");
+      const template = templates[key];
+      if (!template) return;
+
+      incomingEl.value = template.incoming;
+      goalEl.value = template.goal;
+      toneEl.value = template.tone;
+      lengthEl.value = template.length;
+    });
+  });
+
+  generateBtn?.addEventListener("click", () => {
+    const incoming = (incomingEl?.value || "").trim();
+    const goal = (goalEl?.value || "").trim();
+    const tone = toneEl?.value || "professional";
+    const selectedLength = lengthEl?.value || "medium";
+
+    if (!incoming) {
+      shortEl.value = "Please add the incoming message first.";
+      mediumEl.value = "Please add the incoming message first.";
+      longEl.value = "Please add the incoming message first.";
+      return;
+    }
+
+    shortEl.value = buildReply(incoming, goal, tone, "short");
+    mediumEl.value = buildReply(incoming, goal, tone, "medium");
+    longEl.value = buildReply(incoming, goal, tone, "long");
+
+    if (typeof window.gtag === "function") {
+      window.gtag("event", "tool_generate", {
+        tool_name: "whatsapp_reply_generator",
+        selected_tone: tone,
+        selected_length: selectedLength,
+      });
+    }
+
+    if (selectedLength === "short") {
+      shortEl.focus();
+    } else if (selectedLength === "long") {
+      longEl.focus();
+    } else {
+      mediumEl.focus();
+    }
+  });
+
+  copyBtn?.addEventListener("click", async () => {
+    const selectedLength = lengthEl?.value || "medium";
+    const selectedText =
+      selectedLength === "short"
+        ? shortEl?.value
+        : selectedLength === "long"
+          ? longEl?.value
+          : mediumEl?.value;
+    const text = (selectedText || "").trim();
+    if (!text) return;
+
+    try {
+      await navigator.clipboard.writeText(text);
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "tool_copy", {
+          tool_name: "whatsapp_reply_generator",
+          selected_length: selectedLength,
+        });
+      }
+      copyBtn.textContent = "Copied";
+      setTimeout(() => {
+        copyBtn.textContent = "Copy";
+      }, 1200);
+    } catch {
+      copyBtn.textContent = "Copy failed";
+      setTimeout(() => {
+        copyBtn.textContent = "Copy";
+      }, 1200);
+    }
+  });
+</script>
