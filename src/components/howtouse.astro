@@ -31,24 +31,28 @@ import showImage from "assets/show.png";
       </div>
     </div>
 
-    <div class="rounded-2xl border border-[var(--line-soft)] p-4 bg-gray-50">
-      <Picture
-        src={showImage}
-        alt="ChatGPT for WhatsApp interface preview"
-        widths={[200, 300, 500, 800]}
-        sizes="(max-width: 1024px) 100vw, 520px"
-        loading="eager"
-        format="avif"
-        class="rounded-xl w-full"
-      />
-      <a
-        href="https://wa.me/8618601586458"
-        data-cta="howto_try_chatbot"
-        data-location="howto"
-        class="mt-4 inline-flex items-center justify-center rounded-xl bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2.5"
-      >
-        Try Chatbot
-      </a>
+    <div class="relative flex items-center justify-center min-h-[420px]">
+      <div class="relative w-full max-w-md">
+        <Picture
+          src={showImage}
+          alt="ChatGPT for WhatsApp interface preview"
+          widths={[200, 300, 500, 800]}
+          sizes="(max-width: 1024px) 100vw, 420px"
+          loading="eager"
+          format="avif"
+          class="rounded-2xl w-full opacity-75"
+        />
+        <div class="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/12 via-white/28 to-white/42"></div>
+
+        <a
+          href="https://wa.me/8618601586458"
+          data-cta="howto_try_chatbot"
+          data-location="howto"
+          class="absolute inset-0 m-auto h-fit w-fit inline-flex items-center justify-center rounded-xl bg-rose-600/95 hover:bg-rose-700 text-white font-semibold px-5 py-3 shadow-lg shadow-rose-500/35"
+        >
+          Try Chatbot
+        </a>
+      </div>
     </div>
   </div>
 </section>
