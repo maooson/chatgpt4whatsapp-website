@@ -25,7 +25,7 @@ const pricing = [
   {
     name: "Pro",
     price: {
-      monthly: "CN¥99",
+      monthly: "$19",
     },
     popular: true,
     features: [
@@ -45,7 +45,7 @@ const pricing = [
   {
     name: "Max",
     price: {
-      monthly: "CN¥299",
+      monthly: "$29",
     },
     popular: false,
     features: [
@@ -66,16 +66,16 @@ const pricing = [
 
 <Layout
   title="Pricing"
-  description="Choose a plan for Agent for WhatsApp. Start free and upgrade when you need advanced automation and controls."
+  description="Simple, transparent pricing for Agent for WhatsApp. Start free and scale as you grow."
 >
   <Container>
     <Sectionhead>
-      <Fragment slot="title">Get Started</Fragment>
-      <Fragment slot="desc">Plans to fit your needs</Fragment>
+      <Fragment slot="title">Simple, Transparent Pricing</Fragment>
+      <Fragment slot="desc">Start free. Upgrade when you need more power.</Fragment>
     </Sectionhead>
 
     <div
-      class="grid md:grid-cols-3 gap-6 mx-auto max-w-screen-lg mt-16 rounded-lg">
+      class="grid md:grid-cols-3 gap-6 mx-auto max-w-screen-lg mt-16 pt-4 items-start">
       {pricing.map((item) => <Pricing plan={item} />)}
     </div>
   </Container>

@@ -1,6 +1,7 @@
 ---
 import { Tick } from "@components/ui/icons";
 import Link from "@components/ui/link.astro";
+import { Icon } from "astro-icon";
 
 const { plan } = Astro.props;
 const buttonLink = plan.button.link || "#";
@@ -10,55 +11,97 @@ const ctaLink =
     : buttonLink.includes("?")
       ? `${buttonLink}&utm_source=site&utm_medium=pricing&utm_campaign=${plan.name.toLowerCase()}`
       : `${buttonLink}?utm_source=site&utm_medium=pricing&utm_campaign=${plan.name.toLowerCase()}`;
+
+const isPro = plan.name === "Pro";
+const isMax = plan.name === "Max";
+const isPaid = isPro || isMax;
 ---
 
-<div>
-  <div
-    class={`flex flex-col w-full order-first lg:order-none py-5 px-6 rounded-lg ${
-      plan.name === "Pro" ? "bg-pink-100" : "bg-gray-100"
-    } ${plan.name === "Pro" ? "transform -translate-y-5" : ""}`}>
-    <div class="text-center">
-      <h4 class="text-lg text-gray-400">{plan.name}</h4>
-      <p
-        class={`mt-4 text-4xl font-medium md:text-xl ${
-          plan.name === "Pro" ? "text-pink-500" : "text-gray-600"
-        }`}>
-        {
-          plan.price && typeof plan.price === "object"
-            ? plan.price.monthly
-            : plan.price
-        }
-      </p>
-
-      {
-        plan.name === "Pro" || plan.name === "Pro" ? (
-          <p class="text-gray-500 text-sm pt-2">Per user/month</p>
-        ) : null
-      }
+<div class="relative">
+  {isPro && (
+    <div class="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+      <span class="inline-flex items-center gap-1 bg-pink-600 text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full shadow-md">
+        <Icon name="mdi:star" class="w-3.5 h-3.5" />
+        Most Popular
+      </span>
     </div>
-    <ul class="grid mt-8 text-left gap-y-4">
+  )}
+
+  <div
+    class:list={[
+      "flex flex-col w-full rounded-2xl border-2 p-7 transition-shadow",
+      isPro
+        ? "border-pink-400 bg-gradient-to-b from-pink-50 to-white shadow-lg shadow-pink-100/60 scale-[1.03]"
+        : "border-[var(--line-soft)] bg-white shadow-sm hover:shadow-md",
+    ]}>
+
+    <!-- Header -->
+    <div class="text-center pb-6 border-b border-[var(--line-soft)]">
+      <h4 class:list={[
+        "text-sm font-bold uppercase tracking-widest",
+        isPro ? "text-pink-600" : "text-gray-400",
+      ]}>{plan.name}</h4>
+
+      <div class="mt-4 flex items-baseline justify-center gap-1">
+        {isPaid ? (
+          <>
+            <span class:list={[
+              "text-5xl font-extrabold tracking-tight",
+              isPro ? "text-gray-900" : "text-gray-800",
+            ]}>
+              {typeof plan.price === "object" ? plan.price.monthly : plan.price}
+            </span>
+            <span class="text-gray-500 text-sm font-medium">/mo</span>
+          </>
+        ) : (
+          <span class="text-5xl font-extrabold tracking-tight text-gray-800">Free</span>
+        )}
+      </div>
+
+      {isPaid && (
+        <p class="text-gray-500 text-xs mt-2">Billed monthly · Cancel anytime</p>
+      )}
+      {!isPaid && (
+        <p class="text-gray-500 text-xs mt-2">No credit card required</p>
+      )}
+    </div>
+
+    <!-- Features -->
+    <ul class="mt-6 space-y-3 flex-1">
       {
-        plan.features.map((item) => (
-          <li class="flex gap-2 text-gray-900">
-            <Tick class="w-6 h-6" />
-            <span>{item}</span>
+        plan.features.map((item, i) => (
+          <li class="flex gap-2.5 items-start">
+            {i === 0 && isPaid ? (
+              <Icon name="mdi:arrow-up-circle" class="w-5 h-5 text-pink-500 mt-0.5 shrink-0" />
+            ) : (
+              <Icon name="mdi:check-circle" class="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
+            )}
+            <span class:list={[
+              "text-sm",
+              i === 0 && isPaid ? "font-semibold text-pink-700" : "text-gray-700",
+            ]}>{item}</span>
           </li>
         ))
       }
     </ul>
-    <div class="flex mt-8 justify-center mb-4">
+
+    <!-- CTA -->
+    <div class="mt-8">
       <Link
         href={ctaLink || "#"}
         data-cta={`pricing_${plan.name.toLowerCase()}_click`}
         data-location="pricing"
         rel="noopener"
         target="_blank"
-        class={`py-2 px-4 rounded-lg focus:outline-none ${
-          plan.name === "Pro"
-            ? "bg-pink-500 text-white hover:bg-pink-500"
-            : "bg-gray-300 text-gray-600 hover:bg-gray-200"
-        }`}>
-        {plan.button.text || "Start Free Trial"}
+        class:list={[
+          "block w-full text-center py-3 px-5 rounded-xl font-semibold transition-all text-sm",
+          isPro
+            ? "bg-pink-600 text-white hover:bg-pink-700 shadow-md shadow-pink-200/60"
+            : isMax
+              ? "bg-gray-900 text-white hover:bg-gray-800"
+              : "bg-white text-gray-800 border-2 border-gray-200 hover:border-pink-300 hover:text-pink-600",
+        ]}>
+        {plan.button.text || "Get Started"}
       </Link>
     </div>
   </div>
