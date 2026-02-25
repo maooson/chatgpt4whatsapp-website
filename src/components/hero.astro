@@ -7,23 +7,24 @@ import { Icon } from "astro-icon";
   <div>
     <p class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-pink-600 bg-[var(--brand-50)] border border-[var(--line-soft)] rounded-full px-3 py-1">
       <span class="w-2 h-2 rounded-full bg-green-500"></span>
-      Built for WhatsApp Web workflows
+      Chrome Extension for WhatsApp Web
     </p>
 
     <div class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-gray-900">
-      <span class="block">Write Better Replies</span>
+      <span class="block">Automate Replies</span>
       <span class="inline-block mt-1 text-gray-700">with Agent for </span>
       <span class="inline-block mt-1 relative min-w-[180px]">
         <span id="dynamic-text-0" class="platform-name visible">WhatsApp</span>
         <span id="dynamic-text-1" class="platform-name">Support</span>
         <span id="dynamic-text-2" class="platform-name">Sales</span>
-        <span id="dynamic-text-3" class="platform-name">Team Ops</span>
+        <span id="dynamic-text-3" class="platform-name">Leads</span>
       </span>
     </div>
 
     <p class="text-lg mt-6 text-gray-700 max-w-2xl">
-      Draft, rewrite, and translate messages inside WhatsApp Web.
-      Ship faster conversations with better consistency and less manual typing.
+      Connect your preferred AI model, customize reply behavior with persona settings,
+      and control everything from a simple dashboard. Includes lead management,
+      message workflows, and usage insights.
     </p>
 
     <div class="mt-8 flex flex-col sm:flex-row gap-3">
@@ -35,7 +36,7 @@ import { Icon } from "astro-icon";
         class="flex gap-2 items-center justify-center bg-pink-600 hover:bg-pink-700 rounded-xl text-white font-semibold"
         rel="noopener">
         <Icon class="text-white w-5 h-5" name="bx:bxl-chrome" />
-        Add to Chrome
+        Add to Chrome — Free
       </Link>
 
       <Link
@@ -62,9 +63,9 @@ import { Icon } from "astro-icon";
     </div>
 
     <div class="mt-6 flex flex-wrap gap-2 text-sm text-gray-700">
-      <span class="px-3 py-1 rounded-full border border-[var(--line-soft)] bg-white">No code setup</span>
-      <span class="px-3 py-1 rounded-full border border-[var(--line-soft)] bg-white">Prompt presets</span>
-      <span class="px-3 py-1 rounded-full border border-[var(--line-soft)] bg-white">Team-ready workflow</span>
+      <span class="px-3 py-1 rounded-full border border-[var(--line-soft)] bg-white">OpenAI · OpenRouter · Groq</span>
+      <span class="px-3 py-1 rounded-full border border-[var(--line-soft)] bg-white">Persona presets</span>
+      <span class="px-3 py-1 rounded-full border border-[var(--line-soft)] bg-white">Lead management</span>
     </div>
   </div>
 
@@ -74,38 +75,38 @@ import { Icon } from "astro-icon";
       <li class="flex items-start gap-3">
         <Icon name="mdi:check-circle" class="w-5 h-5 text-green-500 mt-0.5" />
         <div>
-          <p class="font-semibold text-gray-900">Faster response drafting</p>
-          <p class="text-sm text-gray-600">Turn rough ideas into polished replies in seconds.</p>
+          <p class="font-semibold text-gray-900">Bring your own AI model</p>
+          <p class="text-sm text-gray-600">Switch between OpenAI, OpenRouter, Groq, or local models to balance quality, speed, and cost.</p>
         </div>
       </li>
       <li class="flex items-start gap-3">
         <Icon name="mdi:check-circle" class="w-5 h-5 text-green-500 mt-0.5" />
         <div>
-          <p class="font-semibold text-gray-900">Consistent brand voice</p>
-          <p class="text-sm text-gray-600">Use tone presets so every message sounds intentional.</p>
+          <p class="font-semibold text-gray-900">Natural, on-brand replies</p>
+          <p class="text-sm text-gray-600">Define persona tone and style so every response feels consistent and under your control.</p>
         </div>
       </li>
       <li class="flex items-start gap-3">
         <Icon name="mdi:check-circle" class="w-5 h-5 text-green-500 mt-0.5" />
         <div>
-          <p class="font-semibold text-gray-900">Lower repetitive workload</p>
-          <p class="text-sm text-gray-600">Automate repetitive phrasing and focus on high-value conversations.</p>
+          <p class="font-semibold text-gray-900">Built-in lead & workflow tools</p>
+          <p class="text-sm text-gray-600">Manage leads, automate message workflows, and track usage — all from one dashboard.</p>
         </div>
       </li>
     </ul>
 
     <div class="mt-6 grid grid-cols-3 gap-3">
       <div class="rounded-xl bg-[var(--brand-50)] border border-[var(--line-soft)] p-3 text-center">
-        <p class="text-xl font-bold text-pink-600">3x</p>
-        <p class="text-xs text-gray-600">faster drafts</p>
+        <p class="text-xl font-bold text-pink-600">4+</p>
+        <p class="text-xs text-gray-600">AI providers</p>
       </div>
       <div class="rounded-xl bg-[var(--brand-50)] border border-[var(--line-soft)] p-3 text-center">
-        <p class="text-xl font-bold text-pink-600">10m</p>
+        <p class="text-xl font-bold text-pink-600">5m</p>
         <p class="text-xs text-gray-600">quick setup</p>
       </div>
       <div class="rounded-xl bg-[var(--brand-50)] border border-[var(--line-soft)] p-3 text-center">
         <p class="text-xl font-bold text-pink-600">24/7</p>
-        <p class="text-xs text-gray-600">assist mode</p>
+        <p class="text-xs text-gray-600">auto-reply</p>
       </div>
     </div>
   </div>
@@ -127,7 +128,7 @@ import { Icon } from "astro-icon";
 
 <script>
   let currentIndex = 0;
-  const words = ["WhatsApp", "Support", "Sales", "Team Ops"];
+  const words = ["WhatsApp", "Support", "Sales", "Leads"];
 
   setInterval(() => {
     const currentEl = document.getElementById(`dynamic-text-${currentIndex}`);
