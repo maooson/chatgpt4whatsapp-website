@@ -1,7 +1,7 @@
 ---
 draft: false
-title: "How to Use ChatGPT for WhatsApp Web (Beginner Guide)"
-snippet: "Step-by-step setup for ChatGPT on WhatsApp Web, including installation, provider connection, and common setup mistakes to avoid."
+title: "How to Use Agent for WhatsApp (Beginner Guide)"
+snippet: "Step-by-step setup for Agent for WhatsApp, including installation, provider connection, and common setup mistakes to avoid."
 image: {
     src: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?&fit=crop&w=430&h=240",
     alt: "chat interface on laptop"
@@ -12,7 +12,7 @@ author: "AOQ Team"
 tags: [whatsapp, guide, setup]
 ---
 
-If you want AI help while chatting, this guide shows the fastest way to run ChatGPT inside WhatsApp Web.
+If you want AI help while chatting, this guide shows the fastest way to run Agent for WhatsApp.
 
 You will finish three things:
 1. Install the extension

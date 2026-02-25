@@ -1,7 +1,7 @@
 ---
 draft: false
-title: "ChatGPT for WhatsApp Resources (2026): Docs, Tools, and Workflows"
-snippet: "A curated 2026 resource list for ChatGPT in WhatsApp Web, including setup docs, troubleshooting, prompt libraries, and operations checklists."
+title: "Agent for WhatsApp Resources (2026): Docs, Tools, and Workflows"
+snippet: "A curated 2026 resource list for Agent for WhatsApp, including setup docs, troubleshooting, prompt libraries, and operations checklists."
 publishDate: "2026-02-15 12:25"
 image: {
   src: "https://images.unsplash.com/photo-1542393545-10f5cde2c810?&fit=crop&w=430&h=240",
@@ -12,7 +12,7 @@ author: "AOQ Team"
 tags: [resources, docs, workflows]
 ---
 
-This is a curated resource hub for running ChatGPT in WhatsApp Web effectively.
+This is a curated resource hub for running Agent for WhatsApp effectively.
 
 If you are new, begin with the [setup guide](/blog/getting-started). If you are debugging issues, jump to the [error guide](/blog/error-list).
 

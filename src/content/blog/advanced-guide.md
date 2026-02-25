@@ -1,7 +1,7 @@
 ---
 draft: false
-title: "Advanced ChatGPT for WhatsApp: Prompts, Controls, and Team Workflow"
-snippet: "An advanced playbook for ChatGPT in WhatsApp Web: prompt systems, response quality controls, queue management, and team rollout patterns."
+title: "Advanced Agent for WhatsApp: Prompts, Controls, and Team Workflow"
+snippet: "An advanced playbook for Agent for WhatsApp: prompt systems, response quality controls, queue management, and team rollout patterns."
 image: {
     src: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?&fit=crop&w=430&h=240",
     alt: "advanced settings dashboard"

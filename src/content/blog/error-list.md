@@ -1,7 +1,7 @@
 ---
 draft: false
-title: "ChatGPT for WhatsApp Errors: Fix 401, 403, 429, 500 Fast"
-snippet: "A practical troubleshooting guide for the most common ChatGPT for WhatsApp Web errors, with causes, fixes, and prevention tips."
+title: "Agent for WhatsApp Errors: Fix 401, 403, 429, 500 Fast"
+snippet: "A practical troubleshooting guide for the most common Agent for WhatsApp errors, with causes, fixes, and prevention tips."
 image: {
     src: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?&fit=crop&w=430&h=240",
     alt: "debugging error screen"
@@ -12,7 +12,7 @@ author: "AOQ Team"
 tags: [errors, troubleshooting, whatsapp]
 ---
 
-This page helps you fix common ChatGPT for WhatsApp Web errors without guesswork.
+This page helps you fix common Agent for WhatsApp errors without guesswork.
 
 If you are evaluating stability before purchase, check [Pricing](/pricing) for plan-level controls and support options.
 
