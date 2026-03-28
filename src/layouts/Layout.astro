@@ -7,6 +7,8 @@ import "@fontsource/inter/variable.css";
 export interface Props {
   title: string;
   description?: string;
+  expId?: string;
+  expVariant?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
@@ -16,7 +18,7 @@ const resolvedImageWithDomain = new URL(
   Astro.site
 ).toString();
 
-const { title, description } = Astro.props;
+const { title, description, expId = "", expVariant = "" } = Astro.props;
 
 const makeTitle = title
   ? `${title} | Agent for WhatsApp`
@@ -72,9 +74,6 @@ const keywords = [
         },
       }}
     />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5874636604758542"
-         crossorigin="anonymous"></script>
-    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TZ84NX7M1H"
     ></script>
@@ -87,8 +86,7 @@ const keywords = [
       gtag("config", "G-TZ84NX7M1H");
     </script>
   </head>
-  <body>
-    <amp-auto-ads type="adsense" data-ad-client="ca-pub-5874636604758542"></amp-auto-ads>
+  <body data-exp-id={expId} data-exp-variant={expVariant}>
     <div class="site-bg"></div>
     <Navbar />
     <main>
@@ -96,6 +94,18 @@ const keywords = [
     </main>
     <Footer />
     <script is:inline>
+      const body = document.body;
+      const pageExpId = body?.dataset?.expId || "";
+      const pageExpVariant = body?.dataset?.expVariant || "";
+
+      if (typeof window.gtag === "function" && pageExpId && pageExpVariant) {
+        window.gtag("event", "lp_view", {
+          exp_id: pageExpId,
+          exp_variant: pageExpVariant,
+          page_path: window.location.pathname,
+        });
+      }
+
       document.addEventListener("click", (event) => {
         const target = event.target;
         if (!(target instanceof Element)) return;
@@ -105,12 +115,17 @@ const keywords = [
         const ctaName = ctaEl.getAttribute("data-cta") || "unknown_cta";
         const ctaLocation = ctaEl.getAttribute("data-location") || "unknown";
         const href = ctaEl.getAttribute("href") || "";
+        const ctaExpId = ctaEl.getAttribute("data-exp-id") || pageExpId;
+        const ctaExpVariant =
+          ctaEl.getAttribute("data-exp-variant") || pageExpVariant;
 
         if (typeof window.gtag === "function") {
           window.gtag("event", "cta_click", {
             cta_name: ctaName,
             cta_location: ctaLocation,
             cta_href: href,
+            exp_id: ctaExpId,
+            exp_variant: ctaExpVariant,
           });
         }
       });

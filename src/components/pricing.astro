@@ -15,6 +15,10 @@ const ctaLink =
 const isPro = plan.name === "Pro";
 const isMax = plan.name === "Max";
 const isPaid = isPro || isMax;
+const badgeText = plan.badge;
+const currentPrice = typeof plan.price === "object" ? plan.price.monthly : plan.price;
+const originalPrice =
+  typeof plan.price === "object" ? plan.price.originalMonthly : undefined;
 ---
 
 <div class="relative">
@@ -37,10 +41,17 @@ const isPaid = isPro || isMax;
 
     <!-- Header -->
     <div class="text-center pb-6 border-b border-[var(--line-soft)]">
-      <h4 class:list={[
-        "text-sm font-bold uppercase tracking-widest",
-        isPro ? "text-pink-600" : "text-gray-400",
-      ]}>{plan.name}</h4>
+      <div class="flex items-center justify-center gap-2">
+        <h4 class:list={[
+          "text-sm font-bold uppercase tracking-widest",
+          isPro ? "text-pink-600" : "text-gray-400",
+        ]}>{plan.name}</h4>
+        {badgeText && (
+          <span class="inline-flex items-center rounded-full bg-amber-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-amber-700">
+            {badgeText}
+          </span>
+        )}
+      </div>
 
       <div class="mt-4 flex items-baseline justify-center gap-1">
         {isPaid ? (
@@ -49,7 +60,7 @@ const isPaid = isPro || isMax;
               "text-5xl font-extrabold tracking-tight",
               isPro ? "text-gray-900" : "text-gray-800",
             ]}>
-              {typeof plan.price === "object" ? plan.price.monthly : plan.price}
+              {currentPrice}
             </span>
             <span class="text-gray-500 text-sm font-medium">/mo</span>
           </>
@@ -59,7 +70,12 @@ const isPaid = isPro || isMax;
       </div>
 
       {isPaid && (
-        <p class="text-gray-500 text-xs mt-2">Billed monthly · Cancel anytime</p>
+        <div class="mt-2 space-y-1">
+          {originalPrice && (
+            <p class="text-xs font-medium text-gray-400 line-through">{originalPrice}/mo</p>
+          )}
+          <p class="text-gray-500 text-xs">Billed monthly · Cancel anytime</p>
+        </div>
       )}
       {!isPaid && (
         <p class="text-gray-500 text-xs mt-2">No credit card required</p>
@@ -74,7 +90,7 @@ const isPaid = isPro || isMax;
             {i === 0 && isPaid ? (
               <Icon name="mdi:arrow-up-circle" class="w-5 h-5 text-pink-500 mt-0.5 shrink-0" />
             ) : (
-              <Icon name="mdi:check-circle" class="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
+              <Icon name="mdi:check-circle" class="w-5 h-5 text-pink-500 mt-0.5 shrink-0" />
             )}
             <span class:list={[
               "text-sm",
@@ -106,3 +122,20 @@ const isPaid = isPro || isMax;
     </div>
   </div>
 </div>
+
+<style is:global>
+  .my-vibepass-card {
+    --vp-card-bg: #E8F0C8;
+    --vp-card-border: #111111;
+    --vp-code-bg: #F3FFD0;
+    --vp-btn-bg: #CCFF00;
+    --vp-btn-text: #111111;
+    --vp-btn-border: #111111;
+    --vp-btn-radius: 0px;
+    --vp-shadow: 4px 4px 0 #111111;
+    --vp-accent: #CCFF00;
+    --vp-accent-border: #111111;
+  }
+</style>
+
+<script is:inline src="https://pass.xidao.xyz/widget-v1.js" data-id="dev_3e797c" data-price="9" data-wechat="/wechat-qr.png" data-class="my-vibepass-card"></script>

@@ -1,51 +1,51 @@
 ---
 const faqItems = [
   {
-    question: "What is Agent for WhatsApp?",
+    question: "How quickly can I set up Agent for WhatsApp?",
     answer:
-      "Agent for WhatsApp is a Chrome extension that helps you automate replies, manage conversations, and stay productive on WhatsApp Web. Connect your preferred AI model, customize reply behavior with persona settings, and control everything from a simple dashboard.",
+      "Most teams finish setup in around 5 minutes: install extension, connect model provider, run test connection, then enable trigger and persona settings.",
     link: "/blog/getting-started",
   },
   {
-    question: "Which AI models are supported?",
+    question: "Which AI providers can I use?",
     answer:
-      "You can connect OpenAI, OpenRouter, Groq, or local models. Switch between providers anytime to balance quality, speed, and cost.",
+      "You can connect OpenAI, OpenRouter, Groq, Gemini, and local models (for example Ollama/LM Studio). You can switch connectors anytime.",
     link: "/blog/getting-started",
   },
   {
-    question: "What can I do with the Toolbox?",
+    question: "What business workflows are included?",
     answer:
-      "The Toolbox includes practical tools for lead handling, message operations, and everyday growth tasks — all without leaving WhatsApp Web.",
+      "Toolbox includes lead management, batch sender, and scheduled messages. This gives you a practical pipeline for capture, follow-up, and conversion.",
     link: "/blog/advanced-guide",
   },
   {
-    question: "How does the Persona feature work?",
+    question: "Can we control reply behavior and safety?",
     answer:
-      "Persona lets you define tone, style, and boundaries for your AI assistant. Every reply stays on-brand, natural, and aligned with your workflow.",
-    link: "/blog/advanced-guide",
+      "Yes. You can define persona rules, trigger modes, private/group reply channels, limits, and quiet hours to keep automation predictable.",
+    link: "/pricing",
   },
   {
-    question: "Can I automate replies while I'm away?",
+    question: "How do Free, Pro, and Max differ?",
     answer:
-      "Yes. The Automation feature supports auto-reply, trigger rules, and background workflows to keep conversations moving even when you're busy.",
-    link: "/blog/advanced-guide",
+      "Free is for basic setup and evaluation. Pro and Max unlock higher automation capacity, advanced controls, and stronger support for larger workloads.",
+    link: "/pricing",
   },
   {
-    question: "Is it safe to use for my business?",
+    question: "Can I measure whether it is working?",
     answer:
-      "Yes. Agent for WhatsApp includes usage limits, clear controls, and account-level settings designed for reliable daily business use.",
+      "Yes. Dashboard shows WhatsApp connection state, bot status, and usage analytics like auto replies and recent trend, so performance is visible.",
     link: "/pricing",
   },
 ];
 ---
 
-<section class="mt-20">
+<section>
   <div class="text-center max-w-3xl mx-auto">
     <p class="text-xs uppercase tracking-[0.18em] text-pink-600 font-semibold">FAQ</p>
-    <h2 class="mt-3 text-3xl lg:text-4xl font-bold tracking-tight text-gray-900">Frequently Asked Questions</h2>
+    <h2 class="mt-3 text-3xl lg:text-4xl font-bold tracking-tight text-gray-900">Common Questions Before You Install</h2>
   </div>
 
-  <div class="grid md:grid-cols-2 mt-10 gap-4">
+  <div class="mt-10 max-w-4xl mx-auto space-y-4">
     {
       faqItems.map((item) => (
         <details class="group rounded-2xl border border-[var(--line-soft)] bg-white p-5 shadow-sm">

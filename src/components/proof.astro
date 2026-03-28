@@ -1,0 +1,41 @@
+---
+import { Picture } from "@astrojs/image/components";
+import dashboardShot from "assets/agent4wa/dashboard.png";
+import connectorsShot from "assets/agent4wa/connectors.png";
+import toolboxShot from "assets/agent4wa/toolbox.png";
+import settingsShot from "assets/agent4wa/settings.png";
+---
+
+<section>
+  <div class="text-center max-w-3xl mx-auto">
+    <p class="text-xs uppercase tracking-[0.18em] text-pink-600 font-semibold">Product Proof</p>
+    <h2 class="mt-3 text-3xl lg:text-4xl font-bold tracking-tight text-gray-900">Built for Daily Operations, Not Just Demos</h2>
+    <p class="mt-4 text-gray-600">Everything below is available inside the extension today: dashboard, connectors, toolbox, and settings controls.</p>
+  </div>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 mt-10 gap-4">
+    <article class="rounded-2xl border border-[var(--line-soft)] bg-white p-4 shadow-sm">
+      <Picture src={dashboardShot} alt="Dashboard screenshot" widths={[220, 380, 560]} sizes="(max-width: 1024px) 50vw, 280px" format="avif" class="w-full h-56 sm:h-52 lg:h-48 object-cover object-top rounded-xl border border-[var(--line-soft)]" />
+      <h3 class="font-semibold text-gray-900 mt-3">Dashboard</h3>
+      <p class="text-sm text-gray-600 mt-1">Track WhatsApp connection, bot state, plan, and 14-day reply trend.</p>
+    </article>
+
+    <article class="rounded-2xl border border-[var(--line-soft)] bg-white p-4 shadow-sm">
+      <Picture src={connectorsShot} alt="Connectors screenshot" widths={[220, 380, 560]} sizes="(max-width: 1024px) 50vw, 280px" format="avif" class="w-full h-56 sm:h-52 lg:h-48 object-cover object-top rounded-xl border border-[var(--line-soft)]" />
+      <h3 class="font-semibold text-gray-900 mt-3">AI Connectors</h3>
+      <p class="text-sm text-gray-600 mt-1">Switch between OpenAI, OpenRouter, Groq, Gemini, and Local models.</p>
+    </article>
+
+    <article class="rounded-2xl border border-[var(--line-soft)] bg-white p-4 shadow-sm">
+      <Picture src={toolboxShot} alt="Toolbox screenshot" widths={[220, 380, 560]} sizes="(max-width: 1024px) 50vw, 280px" format="avif" class="w-full h-56 sm:h-52 lg:h-48 object-cover object-top rounded-xl border border-[var(--line-soft)]" />
+      <h3 class="font-semibold text-gray-900 mt-3">Toolbox</h3>
+      <p class="text-sm text-gray-600 mt-1">Run lead management, batch sender, and scheduled follow-up tasks.</p>
+    </article>
+
+    <article class="rounded-2xl border border-[var(--line-soft)] bg-white p-4 shadow-sm">
+      <Picture src={settingsShot} alt="Settings screenshot" widths={[220, 380, 560]} sizes="(max-width: 1024px) 50vw, 280px" format="avif" class="w-full h-56 sm:h-52 lg:h-48 object-cover object-top rounded-xl border border-[var(--line-soft)]" />
+      <h3 class="font-semibold text-gray-900 mt-3">Settings Control</h3>
+      <p class="text-sm text-gray-600 mt-1">Tune trigger modes, persona behavior, limits, and quiet hours safely.</p>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+---
+import Container from "@components/container.astro";
+import Cta from "@components/cta.astro";
+import Features from "@components/features.astro";
+import Hero from "@components/hero.astro";
+import Logos from "@components/logos.astro";
+import Proof from "@components/proof.astro";
+import Layout from "@layouts/Layout.astro";
+import Howtouse from "@components/howtouse.astro";
+import Faq from "@components/faq.astro";
+---
+
+<Layout
+  title="Agent for WhatsApp - Plans"
+  description="Compare plans, automation limits, and workflow capabilities for Agent for WhatsApp before you scale campaigns."
+  expId="lp_ab"
+  expVariant="conversion_v1"
+>
+  <Container>
+    <Hero variant="conversion" />
+    <Cta variant="conversion" />
+    <Proof />
+    <Features />
+    <Howtouse />
+    <Faq />
+    <Logos />
+  </Container>
+</Layout>
