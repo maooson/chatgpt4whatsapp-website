@@ -7,7 +7,7 @@ const pathname = Astro.url.pathname;
 <li class="relative">
   <Dropdown class="group">
     <button
-      class="flex items-center gap-1 w-full lg:w-auto lg:px-3 py-2 rounded-lg text-gray-800 hover:text-pink-600 hover:bg-pink-50 transition font-medium">
+      class="flex w-full items-center gap-1 rounded-lg py-2 font-medium text-[var(--ink-700)] transition hover:bg-[var(--brand-50)] hover:text-[var(--ink-900)] lg:w-auto lg:px-3">
       <span>{title}</span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -39,8 +39,8 @@ const pathname = Astro.url.pathname;
                 class:list={[
                   "py-1.5 px-2 rounded-md text-sm transition",
                   pathname === item.path
-                    ? "text-pink-700 bg-pink-100"
-                    : "text-gray-700 hover:text-pink-600 hover:bg-pink-50",
+                    ? "text-[var(--ink-900)] bg-[var(--brand-50)]"
+                    : "text-[var(--ink-700)] hover:text-[var(--ink-900)] hover:bg-[var(--brand-50)]",
                 ]}>
                 {item.title}
               </a>

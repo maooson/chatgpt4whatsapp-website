@@ -1,0 +1,174 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import { getCollection } from "astro:content";
+import type { Locale } from "@lib/i18n";
+import { categoryLabels, localizePath } from "@lib/i18n";
+import { getSiteCopy } from "@lib/site-copy";
+
+const { entry } = Astro.props;
+const locale = (Astro.props.locale ?? "en") as Locale;
+const docsCollection = locale === "zh" ? "docs-zh" : "docs";
+const copy = getSiteCopy(locale);
+const categories = [
+  "Get Started",
+  "Core Workflows",
+  "Use Cases",
+  "Troubleshooting",
+  "Admin & Ops",
+];
+const allDocs = await getCollection(docsCollection, ({ data }) => !data.draft);
+allDocs.sort((a, b) => {
+  if (a.data.category === b.data.category) return a.data.order - b.data.order;
+  return categories.indexOf(a.data.category) - categories.indexOf(b.data.category);
+});
+
+const groupedDocs = categories.map((category) => ({
+  category,
+  docs: allDocs.filter((doc) => doc.data.category === category),
+}));
+
+const relatedDocs = entry.data.related
+  .map((slug) => allDocs.find((doc) => doc.slug === slug))
+  .filter(Boolean);
+---
+
+<Layout title={entry.data.title} description={entry.data.description} locale={locale}>
+  <Container>
+    <div class="mx-auto mt-10 grid max-w-7xl gap-10 lg:grid-cols-[260px_minmax(0,1fr)]">
+      <aside class="border-r border-[var(--line-soft)] pr-5">
+        <div class="mb-4">
+          <a href={localizePath("/docs", locale)} class="text-sm font-semibold text-[var(--brand-600)] hover:text-[var(--brand-500)]">
+            {copy.docs.back}
+          </a>
+        </div>
+        {
+          groupedDocs.map(({ category, docs }) => (
+            <div class:list={["mb-6", docs.length === 0 && "hidden"]}>
+              <h3 class="mb-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
+                {categoryLabels[locale][category]}
+              </h3>
+              <ul class="space-y-1">
+                {docs.map((doc) => (
+                  <li>
+                    <a
+                      href={localizePath(`/docs/${doc.slug}`, locale)}
+                      class:list={[
+                        "block rounded-xl px-3 py-2 text-sm transition",
+                        doc.slug === entry.slug
+                          ? "bg-[var(--brand-50)] font-semibold text-[var(--ink-900)]"
+                          : "text-[var(--ink-700)] hover:bg-white hover:text-[var(--ink-900)]",
+                      ]}>
+                      {doc.data.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </aside>
+
+      <article class="p-2 md:p-4">
+        <div class="mb-6 flex flex-wrap items-center gap-3">
+          <span class="eyebrow">
+            {categoryLabels[locale][entry.data.category]}
+          </span>
+          <span class="text-sm text-slate-500">
+            {copy.docs.updated} {entry.data.updatedAt.toLocaleDateString(locale === "zh" ? "zh-CN" : "en-US", {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
+          </span>
+        </div>
+
+        <h1 class="max-w-4xl text-3xl font-bold tracking-tight text-[var(--ink-900)] md:text-5xl">
+          {entry.data.title}
+        </h1>
+        <p class="mt-4 max-w-3xl text-lg leading-8 text-[var(--ink-700)]">
+          {entry.data.description}
+        </p>
+
+        <div class="docs-prose mt-10 max-w-none">
+          <slot />
+        </div>
+
+        {
+          relatedDocs.length > 0 && (
+            <section class="mt-12 border-t border-[var(--line-soft)] pt-6">
+              <h2 class="text-lg font-semibold text-[var(--ink-900)]">{copy.docs.related}</h2>
+              <div class="mt-4 grid gap-3 md:grid-cols-2">
+                {relatedDocs.map((doc) => (
+                  <a
+                    href={localizePath(`/docs/${doc.slug}`, locale)}
+                    class="rounded-2xl border border-[var(--line-soft)] bg-white px-4 py-4 transition hover:bg-white">
+                    <div class="text-sm font-semibold text-[var(--ink-900)]">{doc.data.title}</div>
+                    <div class="mt-1 text-sm leading-6 text-[var(--ink-700)]">{doc.data.description}</div>
+                  </a>
+                ))}
+              </div>
+            </section>
+          )
+        }
+      </article>
+    </div>
+  </Container>
+
+  <style>
+    .docs-prose {
+      color: #334155;
+      line-height: 1.85;
+      font-size: 1.05rem;
+    }
+
+    .docs-prose h2 {
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.625rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .docs-prose h3 {
+      margin-top: 1.75rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .docs-prose p,
+    .docs-prose ul,
+    .docs-prose ol {
+      margin: 0.9rem 0;
+    }
+
+    .docs-prose ul,
+    .docs-prose ol {
+      padding-left: 1.25rem;
+    }
+
+    .docs-prose li {
+      margin: 0.4rem 0;
+    }
+
+    .docs-prose code {
+      border-radius: 0.5rem;
+      background: #f4efe7;
+      padding: 0.15rem 0.4rem;
+      font-size: 0.92em;
+      color: #7b5c3f;
+    }
+
+    .docs-prose a {
+      color: #7b5c3f;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .docs-prose strong {
+      color: #0f172a;
+    }
+  </style>
+</Layout>

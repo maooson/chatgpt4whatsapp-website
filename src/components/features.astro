@@ -1,61 +1,42 @@
 ---
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
+import type { Locale } from "@lib/i18n";
+import { getSiteCopy } from "@lib/site-copy";
 
-const useCases = [
-  {
-    title: "Customer Support",
-    outcome: "Reply faster with consistent tone",
-    points: [
-      "Auto-draft answers in private chats",
-      "Use persona boundaries to avoid off-brand replies",
-      "Pause automation with quiet hours when needed",
-    ],
-    icon: "mdi:headset",
-  },
-  {
-    title: "Sales Follow-up",
-    outcome: "Move more leads to next step",
-    points: [
-      "Capture and tag leads from WhatsApp chats",
-      "Schedule follow-up sequences from batch sender",
-      "Track progress by status: New to Won",
-    ],
-    icon: "mdi:chart-line",
-  },
-  {
-    title: "Team Operations",
-    outcome: "Keep workflows predictable",
-    points: [
-      "Switch model providers by cost and speed",
-      "Control trigger mode, limits, and reply channels",
-      "Review usage trend and automation status in dashboard",
-    ],
-    icon: "mdi:account-group",
-  },
-];
+const { locale = "en" } = Astro.props as { locale?: Locale };
+const copy = getSiteCopy(locale);
+const features = copy.features.cards.map((card, index) => ({
+  icon: ["mdi:robot-happy", "mdi:account-group", "mdi:send-clock"][index],
+  ...card,
+}));
 ---
 
 <section>
-  <div class="text-center max-w-3xl mx-auto">
-    <p class="text-xs uppercase tracking-[0.18em] text-pink-600 font-semibold">Use Cases</p>
-    <h2 class="mt-3 text-3xl lg:text-4xl font-bold tracking-tight text-gray-900">Designed for Revenue-Critical Conversations</h2>
-    <p class="mt-4 text-gray-600">From inbound support to outbound follow-up, Agent for WhatsApp turns scattered chats into repeatable workflows.</p>
+  <div class="mx-auto max-w-3xl text-center">
+    <p class="eyebrow">{copy.features.eyebrow}</p>
+    <h2 class="section-title mt-3 text-3xl lg:text-5xl">{copy.features.title}</h2>
+    <p class="mx-auto mt-4 max-w-2xl text-lg leading-8 text-[var(--ink-700)]">
+      {copy.features.desc}
+    </p>
   </div>
 
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 mt-10 gap-4">
-    {
-      useCases.map((item) => (
-        <article class="rounded-2xl border border-[var(--line-soft)] bg-white p-6 shadow-sm">
-          <div class="w-11 h-11 rounded-xl bg-[var(--brand-50)] border border-[var(--line-soft)] flex items-center justify-center">
-            <Icon class="text-pink-600 w-6 h-6" name={item.icon} />
-          </div>
-          <h3 class="font-semibold text-lg text-gray-900 mt-4">{item.title}</h3>
-          <p class="mt-1 text-sm text-pink-700 font-medium">{item.outcome}</p>
-          <ul class="mt-3 space-y-2 text-sm text-gray-600">
-            {item.points.map((point) => <li>• {point}</li>)}
-          </ul>
-        </article>
-      ))
-    }
+  <div class="mt-12 grid gap-6 lg:grid-cols-3">
+    {features.map((f) => (
+      <div class="surface-card p-7">
+        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--brand-50)]">
+          <Icon name={f.icon} class="h-6 w-6 text-[var(--brand-600)]" />
+        </div>
+        <h3 class="mt-5 text-lg font-bold text-[var(--ink-900)]">{f.title}</h3>
+        <p class="mt-2 text-sm leading-6 text-[var(--ink-700)]">{f.desc}</p>
+        <ul class="mt-4 space-y-2">
+          {f.items.map((item) => (
+            <li class="flex items-center gap-2 text-sm text-[var(--ink-700)]">
+              <Icon name="mdi:check-circle" class="h-4 w-4 shrink-0 text-[var(--brand-500)]" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
   </div>
 </section>

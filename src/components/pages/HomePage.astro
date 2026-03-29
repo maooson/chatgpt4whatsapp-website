@@ -1,0 +1,49 @@
+---
+import Container from "@components/container.astro";
+import Cta from "@components/cta.astro";
+import Features from "@components/features.astro";
+import Faq from "@components/faq.astro";
+import Hero from "@components/hero.astro";
+import Howtouse from "@components/howtouse.astro";
+import Proof from "@components/proof.astro";
+import Layout from "@layouts/Layout.astro";
+import type { Locale } from "@lib/i18n";
+
+const { locale } = Astro.props as { locale: Locale };
+
+const description =
+  locale === "zh"
+    ? "用 AI 自动化 WhatsApp 回复、线索跟进和消息工作流。支持 OpenAI、OpenRouter、Groq、Gemini 和本地模型，几分钟即可开始。"
+    : "Automate WhatsApp replies, run lead follow-up workflows, and keep team conversations on-brand. Connect OpenAI/OpenRouter/Groq/Gemini/Local models and launch in minutes.";
+---
+
+<Layout
+  title="Agent for WhatsApp"
+  description={description}
+  expId="lp_home"
+  expVariant="install_v1"
+  locale={locale}
+>
+  <Hero variant="install" locale={locale} />
+  <Container>
+    <section class="mt-16">
+      <Proof locale={locale} />
+    </section>
+
+    <section class="mt-20" id="features">
+      <Features locale={locale} />
+    </section>
+
+    <section class="mt-20">
+      <Howtouse locale={locale} />
+    </section>
+
+    <section class="mt-20">
+      <Faq locale={locale} />
+    </section>
+
+    <section class="mb-8 mt-20">
+      <Cta variant="install" locale={locale} />
+    </section>
+  </Container>
+</Layout>

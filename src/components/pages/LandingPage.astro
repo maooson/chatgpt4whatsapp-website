@@ -1,0 +1,51 @@
+---
+import Container from "@components/container.astro";
+import Cta from "@components/cta.astro";
+import Features from "@components/features.astro";
+import Faq from "@components/faq.astro";
+import Hero from "@components/hero.astro";
+import Howtouse from "@components/howtouse.astro";
+import Proof from "@components/proof.astro";
+import Layout from "@layouts/Layout.astro";
+import type { Locale } from "@lib/i18n";
+
+type Variant = "install" | "conversion";
+
+const { locale, variant } = Astro.props as { locale: Locale; variant: Variant };
+
+const title =
+  variant === "install"
+    ? locale === "zh"
+      ? "Agent for WhatsApp - 安装"
+      : "Agent for WhatsApp - Install"
+    : locale === "zh"
+      ? "Agent for WhatsApp - 套餐"
+      : "Agent for WhatsApp - Plans";
+
+const description =
+  variant === "install"
+    ? locale === "zh"
+      ? "安装 Agent for WhatsApp，在几分钟内启动 AI 回复、线索管理和跟进工作流。"
+      : "Install Agent for WhatsApp and launch AI-powered reply, lead, and follow-up workflows in minutes."
+    : locale === "zh"
+      ? "对比 Agent for WhatsApp 的套餐、自动化能力和工作流配置。"
+      : "Compare plans, automation limits, and workflow capabilities for Agent for WhatsApp before you scale campaigns.";
+---
+
+<Layout
+  title={title}
+  description={description}
+  expId="lp_ab"
+  expVariant={variant === "install" ? "install_v1" : "conversion_v1"}
+  locale={locale}
+>
+  <Container>
+    <Hero variant={variant} locale={locale} />
+    {variant === "conversion" && <Cta variant="conversion" locale={locale} />}
+    <Proof locale={locale} />
+    <Features locale={locale} />
+    <Howtouse locale={locale} />
+    <Faq locale={locale} />
+    {variant === "install" && <Cta variant="install" locale={locale} />}
+  </Container>
+</Layout>

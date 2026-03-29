@@ -1,0 +1,19 @@
+---
+import { getEntry, render } from "astro:content";
+import DocsLayout from "@layouts/DocsLayout.astro";
+import type { Locale } from "@lib/i18n";
+
+const { locale, slug } = Astro.props as { locale: Locale; slug: string };
+const collection = locale === "zh" ? "docs-zh" : "docs";
+const entry = await getEntry(collection, slug);
+
+if (!entry) {
+  throw new Error(`Doc not found for slug: ${slug}`);
+}
+
+const { Content } = await render(entry);
+---
+
+<DocsLayout entry={entry} locale={locale}>
+  <Content />
+</DocsLayout>

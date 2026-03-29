@@ -1,0 +1,70 @@
+---
+import Container from "@components/container.astro";
+import Pricing from "@components/pricing.astro";
+import Sectionhead from "@components/sectionhead.astro";
+import Layout from "@layouts/Layout.astro";
+import type { Locale } from "@lib/i18n";
+import { getSiteCopy } from "@lib/site-copy";
+
+const { locale } = Astro.props as { locale: Locale };
+const copy = getSiteCopy(locale);
+
+const pricing = [
+  {
+    name: "Starter",
+    price: copy.pricing.free,
+    popular: false,
+    features: copy.pricing.starterFeatures,
+    button: {
+      text: copy.pricing.getStarted,
+      link: "https://chromewebstore.google.com/detail/agent-for-whatsapp/kjeodciaphncjcogidpafdeeckmpdcpn",
+    },
+  },
+  {
+    name: "Pro",
+    price: {
+      monthly: "$9.9",
+      originalMonthly: "$19",
+    },
+    popular: true,
+    badge: copy.pricing.limitedDiscount,
+    features: copy.pricing.proFeatures,
+    button: {
+      text: copy.pricing.getStarted,
+      link: "https://aoq.lemonsqueezy.com/checkout/buy/fda94447-55c8-47cb-aa7c-455f89079b2d",
+    },
+  },
+  {
+    name: "Max",
+    price: {
+      monthly: "$19.9",
+      originalMonthly: "$29",
+    },
+    popular: false,
+    badge: copy.pricing.limitedDiscount,
+    features: copy.pricing.maxFeatures,
+    button: {
+      text: copy.pricing.getStarted,
+      link: "https://aoq.lemonsqueezy.com/checkout/buy/49a4f2a6-9f62-4240-a3e6-d09f3fc70aaf",
+    },
+  },
+];
+
+const description =
+  locale === "zh"
+    ? "Agent for WhatsApp 的简单透明定价。先免费开始，业务增长后再升级。"
+    : "Simple, transparent pricing for Agent for WhatsApp. Start free and scale as you grow.";
+---
+
+<Layout title={copy.pricing.title} description={description} locale={locale}>
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">{copy.pricing.title}</Fragment>
+      <Fragment slot="desc">{copy.pricing.desc}</Fragment>
+    </Sectionhead>
+
+    <div class="mx-auto mt-16 grid max-w-screen-lg items-start gap-6 pt-4 md:grid-cols-3">
+      {pricing.map((item) => <Pricing plan={item} locale={locale} />)}
+    </div>
+  </Container>
+</Layout>

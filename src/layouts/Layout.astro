@@ -3,12 +3,14 @@ import { SEO } from "astro-seo";
 import Footer from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
 import "@fontsource/inter/variable.css";
+import type { Locale } from "@lib/i18n";
 
 export interface Props {
   title: string;
   description?: string;
   expId?: string;
   expVariant?: string;
+  locale?: Locale;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
@@ -18,7 +20,7 @@ const resolvedImageWithDomain = new URL(
   Astro.site
 ).toString();
 
-const { title, description, expId = "", expVariant = "" } = Astro.props;
+const { title, description, expId = "", expVariant = "", locale = "en" } = Astro.props;
 
 const makeTitle = title
   ? `${title} | Agent for WhatsApp`
@@ -44,7 +46,7 @@ const keywords = [
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -88,11 +90,11 @@ const keywords = [
   </head>
   <body data-exp-id={expId} data-exp-variant={expVariant}>
     <div class="site-bg"></div>
-    <Navbar />
+    <Navbar locale={locale} />
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer locale={locale} />
     <script is:inline>
       const body = document.body;
       const pageExpId = body?.dataset?.expId || "";
@@ -132,20 +134,37 @@ const keywords = [
     </script>
     <style is:global>
       :root {
-        --brand-50: #fff4fb;
-        --brand-100: #ffe6f6;
-        --brand-500: #e13ca5;
-        --brand-600: #bf2e8b;
-        --ink-900: #111827;
-        --ink-700: #374151;
-        --line-soft: #f1e4ed;
+        --brand-50: #e8f5e9;
+        --brand-100: #c8e6c9;
+        --brand-500: #22c55e;
+        --brand-600: #16a34a;
+        --cta-500: #22c55e;
+        --cta-600: #16a34a;
+        --ink-900: #0f172a;
+        --ink-700: #475569;
+        --line-soft: #e2e8f0;
         --card-bg: #ffffff;
+        --surface: #fafbfc;
       }
 
       html,
       body {
-        background: radial-gradient(1200px 480px at 70% -10%, var(--brand-100), #ffffff 60%);
+        background: var(--surface);
         color: var(--ink-900);
+        font-family: "InterVariable", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      html[lang="zh"] body {
+        font-family: "PingFang SC", "SF Pro SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+      }
+
+      html[lang="zh"] h1,
+      html[lang="zh"] h2,
+      html[lang="zh"] h3,
+      html[lang="zh"] .section-title {
+        font-family: "PingFang SC", "SF Pro SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+        font-weight: 800;
+        letter-spacing: -0.045em;
       }
 
       main {
@@ -159,14 +178,78 @@ const keywords = [
         pointer-events: none;
         z-index: 0;
         background-image:
-          radial-gradient(circle at 12% 18%, rgba(225, 60, 165, 0.08), transparent 24%),
-          radial-gradient(circle at 88% 34%, rgba(37, 211, 102, 0.07), transparent 22%);
+          radial-gradient(circle at 50% -8%, rgba(34, 197, 94, 0.08), transparent 36%),
+          radial-gradient(circle at 80% 60%, rgba(34, 197, 94, 0.04), transparent 30%),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
       }
 
       /* Improve Page speed */
       /* https://css-tricks.com/almanac/properties/c/content-visibility/ */
       img {
         content-visibility: auto;
+      }
+
+      .eyebrow {
+        font-size: 0.74rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--brand-600);
+        font-weight: 600;
+      }
+
+      html[lang="zh"] .eyebrow {
+        letter-spacing: 0.08em;
+      }
+
+      .section-title {
+        color: var(--ink-900);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+      }
+
+      .surface-card {
+        background: #ffffff;
+        border: 1px solid var(--line-soft);
+        border-radius: 1.25rem;
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
+      }
+
+      .surface-card:hover {
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+      }
+
+      .btn-primary {
+        background: var(--cta-600);
+        color: white;
+        transition: background 0.2s ease, transform 0.15s ease;
+      }
+
+      .btn-primary:hover {
+        background: var(--cta-500);
+        transform: translateY(-1px);
+      }
+
+      .btn-secondary {
+        background: #ffffff;
+        color: var(--ink-900);
+        border: 1px solid var(--line-soft);
+        transition: background 0.2s ease, border-color 0.2s ease;
+      }
+
+      .btn-secondary:hover {
+        background: var(--brand-50);
+        border-color: var(--brand-500);
+      }
+
+      .btn-dark {
+        background: var(--ink-900);
+        color: white;
+        transition: background 0.2s ease, transform 0.15s ease;
+      }
+
+      .btn-dark:hover {
+        background: #1e293b;
+        transform: translateY(-1px);
       }
     </style>
   </body>

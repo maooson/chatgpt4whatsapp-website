@@ -1,41 +1,44 @@
 ---
-import { Picture } from "@astrojs/image/components";
-import dashboardShot from "assets/agent4wa/dashboard.png";
-import connectorsShot from "assets/agent4wa/connectors.png";
-import toolboxShot from "assets/agent4wa/toolbox.png";
-import settingsShot from "assets/agent4wa/settings.png";
+import { Icon } from "astro-icon/components";
+import type { Locale } from "@lib/i18n";
+import { getSiteCopy } from "@lib/site-copy";
+
+const { locale = "en" } = Astro.props as { locale?: Locale };
+const copy = getSiteCopy(locale);
+const stats = copy.proof.stats;
+
+const providers = [
+  { name: "OpenAI", icon: "simple-icons:openai" },
+  { name: "Google", icon: "simple-icons:google" },
+  { name: "Meta", icon: "mdi:web" },
+  { name: "Groq", icon: "mdi:lightning-bolt" },
+  { name: "Ollama", icon: "mdi:robot-outline" },
+  { name: "OpenRouter", icon: "mdi:router-wireless" },
+  { name: "AnythingLLM", icon: "mdi:brain" },
+];
 ---
 
 <section>
-  <div class="text-center max-w-3xl mx-auto">
-    <p class="text-xs uppercase tracking-[0.18em] text-pink-600 font-semibold">Product Proof</p>
-    <h2 class="mt-3 text-3xl lg:text-4xl font-bold tracking-tight text-gray-900">Built for Daily Operations, Not Just Demos</h2>
-    <p class="mt-4 text-gray-600">Everything below is available inside the extension today: dashboard, connectors, toolbox, and settings controls.</p>
+  <!-- Provider logos -->
+  <div class="flex flex-wrap items-center justify-center gap-8 opacity-60">
+    {providers.map((p) => (
+      <div class="flex items-center gap-2 text-[var(--ink-700)]">
+        <Icon name={p.icon} class="w-5 h-5" />
+        <span class="text-sm font-medium">{p.name}</span>
+      </div>
+    ))}
   </div>
 
-  <div class="grid sm:grid-cols-2 lg:grid-cols-4 mt-10 gap-4">
-    <article class="rounded-2xl border border-[var(--line-soft)] bg-white p-4 shadow-sm">
-      <Picture src={dashboardShot} alt="Dashboard screenshot" widths={[220, 380, 560]} sizes="(max-width: 1024px) 50vw, 280px" format="avif" class="w-full h-56 sm:h-52 lg:h-48 object-cover object-top rounded-xl border border-[var(--line-soft)]" />
-      <h3 class="font-semibold text-gray-900 mt-3">Dashboard</h3>
-      <p class="text-sm text-gray-600 mt-1">Track WhatsApp connection, bot state, plan, and 14-day reply trend.</p>
-    </article>
-
-    <article class="rounded-2xl border border-[var(--line-soft)] bg-white p-4 shadow-sm">
-      <Picture src={connectorsShot} alt="Connectors screenshot" widths={[220, 380, 560]} sizes="(max-width: 1024px) 50vw, 280px" format="avif" class="w-full h-56 sm:h-52 lg:h-48 object-cover object-top rounded-xl border border-[var(--line-soft)]" />
-      <h3 class="font-semibold text-gray-900 mt-3">AI Connectors</h3>
-      <p class="text-sm text-gray-600 mt-1">Switch between OpenAI, OpenRouter, Groq, Gemini, and Local models.</p>
-    </article>
-
-    <article class="rounded-2xl border border-[var(--line-soft)] bg-white p-4 shadow-sm">
-      <Picture src={toolboxShot} alt="Toolbox screenshot" widths={[220, 380, 560]} sizes="(max-width: 1024px) 50vw, 280px" format="avif" class="w-full h-56 sm:h-52 lg:h-48 object-cover object-top rounded-xl border border-[var(--line-soft)]" />
-      <h3 class="font-semibold text-gray-900 mt-3">Toolbox</h3>
-      <p class="text-sm text-gray-600 mt-1">Run lead management, batch sender, and scheduled follow-up tasks.</p>
-    </article>
-
-    <article class="rounded-2xl border border-[var(--line-soft)] bg-white p-4 shadow-sm">
-      <Picture src={settingsShot} alt="Settings screenshot" widths={[220, 380, 560]} sizes="(max-width: 1024px) 50vw, 280px" format="avif" class="w-full h-56 sm:h-52 lg:h-48 object-cover object-top rounded-xl border border-[var(--line-soft)]" />
-      <h3 class="font-semibold text-gray-900 mt-3">Settings Control</h3>
-      <p class="text-sm text-gray-600 mt-1">Tune trigger modes, persona behavior, limits, and quiet hours safely.</p>
-    </article>
+  <!-- Stats bar -->
+  <div class="mt-10 rounded-2xl border border-[var(--line-soft)] bg-white p-6 sm:p-8">
+    <p class="mb-6 text-center text-sm font-semibold uppercase tracking-widest text-[var(--brand-600)]">{copy.proof.statsTitle}</p>
+    <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+      {stats.map((stat) => (
+        <div class="text-center">
+          <div class="text-3xl font-extrabold tracking-tight text-[var(--ink-900)] lg:text-4xl">{stat.value}</div>
+          <p class="mt-1 text-sm text-[var(--ink-700)]">{stat.label}</p>
+        </div>
+      ))}
+    </div>
   </div>
 </section>

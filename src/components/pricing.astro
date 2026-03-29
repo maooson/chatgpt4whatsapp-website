@@ -1,9 +1,12 @@
 ---
 import { Tick } from "@components/ui/icons";
 import Link from "@components/ui/link.astro";
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
+import type { Locale } from "@lib/i18n";
+import { getSiteCopy } from "@lib/site-copy";
 
-const { plan } = Astro.props;
+const { plan, locale = "en" } = Astro.props as { plan: any; locale?: Locale };
+const copy = getSiteCopy(locale);
 const buttonLink = plan.button.link || "#";
 const ctaLink =
   buttonLink === "#"
@@ -24,19 +27,19 @@ const originalPrice =
 <div class="relative">
   {isPro && (
     <div class="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-      <span class="inline-flex items-center gap-1 bg-pink-600 text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full shadow-md">
+      <span class="inline-flex items-center gap-1 rounded-full bg-[#EAB308] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
         <Icon name="mdi:star" class="w-3.5 h-3.5" />
-        Most Popular
+        {copy.pricing.mostPopular}
       </span>
     </div>
   )}
 
   <div
     class:list={[
-      "flex flex-col w-full rounded-2xl border-2 p-7 transition-shadow",
+      "flex flex-col w-full rounded-2xl border p-7 transition-shadow",
       isPro
-        ? "border-pink-400 bg-gradient-to-b from-pink-50 to-white shadow-lg shadow-pink-100/60 scale-[1.03]"
-        : "border-[var(--line-soft)] bg-white shadow-sm hover:shadow-md",
+        ? "border-[var(--brand-500)] shadow-xl shadow-[var(--brand-500)]/10 ring-1 ring-[var(--brand-500)] bg-white scale-[1.01]"
+        : "border-[var(--line-soft)] bg-white/72",
     ]}>
 
     <!-- Header -->
@@ -44,10 +47,10 @@ const originalPrice =
       <div class="flex items-center justify-center gap-2">
         <h4 class:list={[
           "text-sm font-bold uppercase tracking-widest",
-          isPro ? "text-pink-600" : "text-gray-400",
+          isPro ? "text-[var(--ink-900)]" : "text-slate-500",
         ]}>{plan.name}</h4>
         {badgeText && (
-          <span class="inline-flex items-center rounded-full bg-amber-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-amber-700">
+          <span class="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">
             {badgeText}
           </span>
         )}
@@ -58,27 +61,27 @@ const originalPrice =
           <>
             <span class:list={[
               "text-5xl font-extrabold tracking-tight",
-              isPro ? "text-gray-900" : "text-gray-800",
+              isPro ? "text-[var(--ink-900)]" : "text-[var(--ink-900)]",
             ]}>
               {currentPrice}
             </span>
-            <span class="text-gray-500 text-sm font-medium">/mo</span>
+            <span class="text-gray-500 text-sm font-medium">{copy.pricing.perMonth}</span>
           </>
         ) : (
-          <span class="text-5xl font-extrabold tracking-tight text-gray-800">Free</span>
+          <span class="text-5xl font-extrabold tracking-tight text-gray-800">{copy.pricing.free}</span>
         )}
       </div>
 
       {isPaid && (
         <div class="mt-2 space-y-1">
           {originalPrice && (
-            <p class="text-xs font-medium text-gray-400 line-through">{originalPrice}/mo</p>
+            <p class="text-xs font-medium text-gray-400 line-through">{originalPrice}{copy.pricing.perMonth}</p>
           )}
-          <p class="text-gray-500 text-xs">Billed monthly · Cancel anytime</p>
+          <p class="text-gray-500 text-xs">{copy.pricing.billedMonthly}</p>
         </div>
       )}
       {!isPaid && (
-        <p class="text-gray-500 text-xs mt-2">No credit card required</p>
+        <p class="text-gray-500 text-xs mt-2">{copy.pricing.noCard}</p>
       )}
     </div>
 
@@ -88,13 +91,13 @@ const originalPrice =
         plan.features.map((item, i) => (
           <li class="flex gap-2.5 items-start">
             {i === 0 && isPaid ? (
-              <Icon name="mdi:arrow-up-circle" class="w-5 h-5 text-pink-500 mt-0.5 shrink-0" />
+              <Icon name="mdi:arrow-up-circle" class="w-5 h-5 text-[var(--brand-500)] mt-0.5 shrink-0" />
             ) : (
-              <Icon name="mdi:check-circle" class="w-5 h-5 text-pink-500 mt-0.5 shrink-0" />
+              <Icon name="mdi:check-circle" class="w-5 h-5 text-[var(--brand-500)] mt-0.5 shrink-0" />
             )}
             <span class:list={[
               "text-sm",
-              i === 0 && isPaid ? "font-semibold text-pink-700" : "text-gray-700",
+              i === 0 && isPaid ? "font-semibold text-[var(--ink-900)]" : "text-[var(--ink-700)]",
             ]}>{item}</span>
           </li>
         ))
@@ -112,30 +115,13 @@ const originalPrice =
         class:list={[
           "block w-full text-center py-3 px-5 rounded-xl font-semibold transition-all text-sm",
           isPro
-            ? "bg-pink-600 text-white hover:bg-pink-700 shadow-md shadow-pink-200/60"
+            ? "bg-[var(--brand-600)] text-white hover:bg-[var(--brand-500)]"
             : isMax
-              ? "bg-gray-900 text-white hover:bg-gray-800"
-              : "bg-white text-gray-800 border-2 border-gray-200 hover:border-pink-300 hover:text-pink-600",
+              ? "bg-[var(--brand-600)] text-white hover:bg-[var(--brand-500)]"
+              : "bg-white text-[var(--ink-900)] border border-[var(--line-soft)] hover:bg-[var(--brand-50)]",
         ]}>
-        {plan.button.text || "Get Started"}
+        {plan.button.text || copy.pricing.getStarted}
       </Link>
     </div>
   </div>
 </div>
-
-<style is:global>
-  .my-vibepass-card {
-    --vp-card-bg: #E8F0C8;
-    --vp-card-border: #111111;
-    --vp-code-bg: #F3FFD0;
-    --vp-btn-bg: #CCFF00;
-    --vp-btn-text: #111111;
-    --vp-btn-border: #111111;
-    --vp-btn-radius: 0px;
-    --vp-shadow: 4px 4px 0 #111111;
-    --vp-accent: #CCFF00;
-    --vp-accent-border: #111111;
-  }
-</style>
-
-<script is:inline src="https://pass.xidao.xyz/widget-v1.js" data-id="dev_3e797c" data-price="9" data-wechat="/wechat-qr.png" data-class="my-vibepass-card"></script>

@@ -1,0 +1,57 @@
+---
+import { Icon } from "astro-icon/components";
+import Container from "@components/container.astro";
+import Contactform from "@components/contactform.astro";
+import Sectionhead from "@components/sectionhead.astro";
+import Layout from "@layouts/Layout.astro";
+import type { Locale } from "@lib/i18n";
+import { getSiteCopy } from "@lib/site-copy";
+
+const { locale } = Astro.props as { locale: Locale };
+const copy = getSiteCopy(locale);
+
+const description =
+  locale === "zh"
+    ? "联系 Agent for WhatsApp 团队，获取支持、反馈和合作帮助。"
+    : "Contact the Agent for WhatsApp team for support, feedback, and partnership requests.";
+---
+
+<Layout title={copy.contact.title} description={description} locale={locale}>
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">{copy.contact.title}</Fragment>
+      <Fragment slot="desc">{copy.contact.desc}</Fragment>
+    </Sectionhead>
+
+    <div class="mx-auto mt-16 grid max-w-5xl gap-10 md:grid-cols-2">
+      <div>
+        <h2 class="text-2xl font-bold tracking-tight text-[var(--ink-900)]">{copy.contact.heading}</h2>
+        <p class="mt-3 text-lg leading-relaxed text-[var(--ink-700)]">{copy.contact.body}</p>
+        <div class="mt-8 space-y-4">
+          <div class="flex items-center space-x-3 text-[var(--ink-700)]">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[var(--line-soft)] bg-[var(--surface)]">
+              <Icon class="h-5 w-5 text-[var(--ink-900)]" name="uil:map-marker" />
+            </div>
+            <a href="https://chat.whatsapp.com/LcjDq9v73ni3UAakBa20FZ" class="transition hover:text-[var(--brand-600)]">{copy.contact.whatsappGroup}</a>
+          </div>
+          <div class="flex items-center space-x-3 text-[var(--ink-700)]">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[var(--line-soft)] bg-[var(--surface)]">
+              <Icon class="h-5 w-5 text-[var(--ink-900)]" name="uil:envelope" />
+            </div>
+            <a href="mailto:hello@chatgpt-for-whatsapp.com" class="transition hover:text-[var(--brand-600)]">contact@aoq.me</a>
+          </div>
+          <div class="flex items-center space-x-3 text-[var(--ink-700)]">
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[var(--line-soft)] bg-[var(--surface)]">
+              <Icon class="h-5 w-5 text-[var(--ink-900)]" name="uil:globe" />
+            </div>
+            <a href="https://www.aoq.me" target="_blank" rel="noopener" class="transition hover:text-[var(--brand-600)]">{copy.contact.website}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-2xl border border-[var(--line-soft)] bg-white p-6 shadow-sm sm:p-8">
+        <Contactform locale={locale} />
+      </div>
+    </div>
+  </Container>
+</Layout>

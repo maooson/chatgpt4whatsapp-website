@@ -1,0 +1,15 @@
+---
+import { getCollection } from "astro:content";
+import DocsEntryPage from "@components/pages/DocsEntryPage.astro";
+
+export async function getStaticPaths() {
+  const docsEntries = await getCollection("docs", ({ data }) => !data.draft);
+  return docsEntries.map((entry) => ({
+    params: { slug: entry.slug || entry.id.replace(/\.(md|mdx)$/, "") },
+  }));
+}
+
+const slug = Astro.params.slug!;
+---
+
+<DocsEntryPage locale="en" slug={slug} />

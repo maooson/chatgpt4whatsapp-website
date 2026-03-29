@@ -1,0 +1,89 @@
+---
+import { getCollection } from "astro:content";
+import Container from "@components/container.astro";
+import Layout from "@layouts/Layout.astro";
+import type { Locale } from "@lib/i18n";
+import { categoryLabels, localizePath } from "@lib/i18n";
+import { getSiteCopy } from "@lib/site-copy";
+
+const { locale } = Astro.props as { locale: Locale };
+const copy = getSiteCopy(locale);
+const categories = ["Get Started", "Core Workflows", "Use Cases", "Troubleshooting", "Admin & Ops"] as const;
+const collection = locale === "zh" ? "docs-zh" : "docs";
+const docs = await getCollection(collection, ({ data }) => !data.draft);
+
+docs.sort((a, b) => {
+  if (a.data.category === b.data.category) return a.data.order - b.data.order;
+  return categories.indexOf(a.data.category) - categories.indexOf(b.data.category);
+});
+
+const grouped = categories.map((category) => ({
+  category,
+  docs: docs.filter((doc) => doc.data.category === category),
+}));
+
+const featured = docs.filter((doc) =>
+  ["quick-start", "message-templates", "batch-sender", "scheduled-messages"].includes(doc.slug)
+);
+
+const title = locale === "zh" ? "文档" : "Docs";
+const description =
+  locale === "zh"
+    ? "围绕 Agent for WhatsApp 产品能力组织的帮助文档：安装、模板、批量发送、定时消息、线索洞察和运维排查。"
+    : "Product-aligned documentation for Agent for WhatsApp: setup, templates, batch sending, scheduled messages, lead intelligence, troubleshooting, and admin operations.";
+---
+
+<Layout title={title} description={description} locale={locale}>
+  <Container>
+    <section class="mt-10">
+      <div class="max-w-3xl">
+        <span class="eyebrow">{copy.docs.eyebrow}</span>
+        <h1 class="section-title mt-5 text-4xl md:text-5xl lg:text-6xl">{copy.docs.title}</h1>
+        <p class="mt-5 text-lg leading-8 text-[var(--ink-700)]">{copy.docs.desc}</p>
+      </div>
+
+      <div class="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {
+          featured.map((doc) => (
+            <a
+              href={localizePath(`/docs/${doc.slug}`, locale)}
+              class="rounded-2xl border border-[var(--line-soft)] bg-white p-5 transition hover:bg-white">
+              <div class="eyebrow !text-[0.68rem] !tracking-[0.12em]">{categoryLabels[locale][doc.data.category]}</div>
+              <div class="mt-2 text-lg font-semibold text-[var(--ink-900)]">{doc.data.title}</div>
+              <p class="mt-2 text-sm leading-6 text-[var(--ink-700)]">{doc.data.description}</p>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mt-14">
+      <div class="grid gap-x-14 gap-y-10 lg:grid-cols-2">
+        {
+          grouped.map(({ category, docs }) => (
+            <section class="border-t border-[var(--line-soft)] pt-6">
+              <div class="flex items-center justify-between gap-4">
+                <div>
+                  <h2 class="text-2xl font-semibold tracking-tight text-[var(--ink-900)]">{categoryLabels[locale][category]}</h2>
+                  <p class="mt-2 text-sm leading-6 text-[var(--ink-700)]">{copy.docs.categoryDescriptions[category]}</p>
+                </div>
+                <span class="text-sm font-medium text-slate-500">{docs.length}</span>
+              </div>
+
+              <div class="mt-6 space-y-3">
+                {docs.map((doc) => (
+                  <a
+                    href={localizePath(`/docs/${doc.slug}`, locale)}
+                    class="block rounded-xl bg-white px-4 py-4 transition hover:text-[var(--ink-900)]">
+                    <div class="text-base font-semibold text-[var(--ink-900)]">{doc.data.title}</div>
+                    <div class="mt-1 text-sm leading-6 text-[var(--ink-700)]">{doc.data.description}</div>
+                  </a>
+                ))}
+              </div>
+            </section>
+          ))
+        }
+      </div>
+    </section>
+  </Container>
+</Layout>

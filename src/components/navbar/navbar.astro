@@ -1,82 +1,95 @@
 ---
 import Container from "@components/container.astro";
-import Link from "@components/ui/link.astro";
 import Dropdown from "./dropdown.astro";
 import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
+import type { Locale } from "@lib/i18n";
+import { getSiteCopy } from "@lib/site-copy";
+import { localizePath, switchLocalePath } from "@lib/i18n";
+
 const pathname = Astro.url.pathname;
+const { locale = "en" } = Astro.props as { locale?: Locale };
+const copy = getSiteCopy(locale);
 
 const menuitems = [
   {
-    title: "Product",
+    title: copy.nav.product,
     path: "#",
     children: [
-      { title: "WhatsApp", path: "https://chromewebstore.google.com/detail/agent-for-whatsapp/kjeodciaphncjcogidpafdeeckmpdcpn" },
-      { title: "Wechat", path: "https://aow.me" },
+      { title: copy.nav.whatsapp, path: "https://chromewebstore.google.com/detail/agent-for-whatsapp/kjeodciaphncjcogidpafdeeckmpdcpn" },
+      { title: copy.nav.wechat, path: "https://aow.me" },
     ],
   },
   {
-    title: "Pricing",
-    path: "/pricing",
-  },
-  // {
-  //   title: "About",
-  //   path: "/about",
-  // },
-  {
-    title: "Blog",
-    path: "/blog",
+    title: copy.nav.pricing,
+    path: localizePath("/pricing", locale),
   },
   {
-    title: "Tools",
-    path: "/tools/whatsapp-reply-generator",
+    title: copy.nav.docs,
+    path: localizePath("/docs", locale),
   },
   {
-    title: "Docs",
-    path: "https://docs.aoq.me",
-  },
-  {
-    title: "Contact",
-    path: "/contact",
+    title: copy.nav.contact,
+    path: localizePath("/contact", locale),
   },
 ];
+const localeSwitchPath = switchLocalePath(pathname, locale === "en" ? "zh" : "en");
 ---
 
-<Container>
-  <header class="sticky top-3 z-50 rounded-2xl border border-pink-200/70 bg-gradient-to-r from-white via-[var(--brand-50)] to-pink-50/70 backdrop-blur supports-[backdrop-filter]:bg-white/80 px-4 py-3 flex flex-col lg:flex-row justify-between items-center my-5 shadow-sm shadow-pink-100/70">
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-[var(--line-soft)] lg:border-none">
+  <Container>
     <Astronav>
-      <div class="flex w-full lg:w-auto items-center justify-between">
-        <a href="/" class="text-lg"
-          ><span class="text-gray-900">Agent for </span><span
-            class="font-bold text-pink-500">
-            WhatsApp</span
-          >
-        </a>
-        <div class="block lg:hidden">
-          <MenuIcon class="w-4 h-4 text-gray-800" />
+      <div class="flex flex-col lg:flex-row w-full justify-between lg:items-center">
+        <!-- Logo and Toggle Button -->
+        <div class="flex w-full lg:w-auto h-16 shrink-0 items-center justify-between">
+          <a href={localizePath("/", locale)} class="shrink-0 text-lg flex items-center gap-2">
+            <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--brand-600)] text-white text-sm font-bold">A</span>
+            <span class="font-semibold text-[var(--ink-900)]">{copy.brand}</span>
+          </a>
+          <div class="block lg:hidden">
+            <MenuIcon class="w-6 h-6 text-[var(--ink-900)] cursor-pointer" />
+          </div>
         </div>
-      </div>
-      <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0 lg:items-center lg:gap-2">
-        <ul class="flex flex-col lg:flex-row lg:gap-1">
+
+        <!-- Mobile Menu Wrapper -->
+        <MenuItems class="hidden w-full lg:w-auto lg:flex lg:flex-1 lg:items-center lg:justify-end pb-6 lg:pb-0">
+          <div class="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-3 w-full lg:w-auto">
+          <ul class="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-1 whitespace-nowrap w-full lg:w-auto">
           {
             menuitems.map((item, index) => (
               <>
                 {item.children && (
-                  <Dropdown
-                    title={item.title}
-                    children={item.children}
-                    lastItem={index === menuitems.length - 1}
-                  />
+                  <div class="hidden lg:block">
+                    <Dropdown
+                      title={item.title}
+                      children={item.children}
+                      lastItem={index === menuitems.length - 1}
+                    />
+                  </div>
+                )}
+                
+                {/* Mobile version of dropdown links (flattened or styled block) */}
+                {item.children && (
+                  <li class="block lg:hidden">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 pl-3 md:pl-0">{item.title}</span>
+                    <ul class="mt-2 space-y-2 border-l border-[var(--line-soft)] ml-3 pl-3">
+                      {item.children.map((child) => (
+                        <li>
+                          <a href={child.path} class="block text-[var(--ink-700)] py-1 font-medium">{child.title}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
                 )}
 
                 {!item.children && (
-                  <li>
+                  <li class="w-full lg:w-auto">
                     <a
                       href={item.path}
                       class:list={[
-                        "flex lg:px-3 py-2 rounded-lg font-medium transition",
+                        "flex rounded-lg py-2.5 px-3 lg:px-3 font-medium transition text-[15px] lg:text-sm w-full lg:w-auto",
                         pathname === item.path
-                          ? "text-pink-700 bg-pink-100"
-                          : "text-gray-800 hover:text-pink-600 hover:bg-pink-50",
+                          ? "bg-[var(--brand-50)] text-[var(--ink-900)]"
+                          : "text-[var(--ink-700)] hover:bg-[var(--brand-50)] hover:text-[var(--ink-900)]",
                       ]}>
                       {item.title}
                     </a>
@@ -85,16 +98,16 @@ const menuitems = [
               </>
             ))
           }
-        </ul>
-        <Link
-          href="/pricing"
-          data-cta="nav_get_started"
-          data-location="navbar"
-          class="mt-2 lg:mt-0 bg-gradient-to-r from-pink-600 to-pink-500 text-white hover:from-pink-700 hover:to-pink-600 rounded-xl font-semibold px-4 py-2"
-        >
-          Get Started
-        </Link>
-      </MenuItems>
+          </ul>
+          <a
+            href={localeSwitchPath}
+            class="inline-flex items-center justify-center rounded-lg border border-[var(--line-soft)] px-3 py-2 text-sm font-medium text-[var(--ink-700)] transition hover:bg-white hover:text-[var(--ink-900)]"
+          >
+            {copy.nav.language}
+          </a>
+          </div>
+        </MenuItems>
+      </div>
     </Astronav>
-  </header>
-</Container>
+  </Container>
+</header>
