@@ -1,78 +1,94 @@
 ---
 draft: false
-title: "Google Login and License Binding"
-description: "Understand how Google authentication, license binding, and paid feature access work together."
+title: "Google 登录与 License 绑定"
+description: "理解账号身份、激活码绑定和付费权限之间的关系，避免登录成功却无法使用高级功能。"
 category: "Get Started"
 order: 2
 audience: ["new-users", "admins"]
-updatedAt: "2026-03-28"
+updatedAt: "2026-03-29"
 related:
   - "quick-start"
   - "troubleshooting"
-  - "license-and-webhook-ops"
 ---
 
-## 🔑 Core Concepts
+## 先理解两个概念
 
-Agent for WhatsApp intentionally separates its architecture into two different concepts:
+在 Agent for WhatsApp 里，**Google 登录** 和 **License 绑定** 是两条独立链路：
 
-- 👤 **Google Login** (Your Identity)
-- 💳 **License Binding** (Your Entitlement)
+<div class="docs-grid-2">
+  <div class="docs-card">
+    <h4>Google 登录</h4>
+    <p>用来确认当前使用扩展的人是谁，是账号、设置和后续同步的身份层。</p>
+  </div>
+  <div class="docs-card">
+    <h4>License 绑定</h4>
+    <p>用来确认你购买了哪个套餐，以及当前账号是否应该获得对应的付费功能。</p>
+  </div>
+</div>
 
-They work together seamlessly, but they serve two distinct purposes.
+只完成其中一个都不够。  
+**你需要先登录，再完成绑定，才能稳定解锁付费能力。**
 
----
+## 标准操作顺序
 
-## 👤 Google Login
+建议按下面的顺序完成：
 
-Google login is the **Identity Layer** that authenticates the actual human behind the extension.
+1. 使用长期会用的 Google 账号登录
+2. 进入账号页，输入 License Key
+3. 绑定成功后，等待功能配置刷新
+4. 再去使用消息模板、批量发送、AI 分析等功能
 
-It enables:
-- Account-level cloud settings
-- Future sync or ownership logic across devices
-- A stable, encrypted identity for license binding
+## Google 登录的作用
 
-> [!TIP] **Seamless Access**
-> You do not need a separate password. Use the Google account you are already logged into on your Chrome browser for minimal friction.
+Google 登录主要负责这几件事：
 
----
+- 保存你的云端设置
+- 作为 License 绑定的账号主体
+- 在新设备上帮助系统识别你是谁
 
-## 💳 License Binding
+建议尽量避免在同一个浏览器 Profile 里频繁切换多个 Google 身份，否则会增加权限识别和绑定排查成本。
 
-License binding connects your purchased **Agent for WhatsApp License Key** to your signed-in Google account.
+## License 绑定后会发生什么
 
-**When binding succeeds:**
-- 🟢 The extension instantly unlocks plan-based premium features
-- 🟢 Entitlement checks authenticate both your license validity and active subscription state
-- 🟢 Future logins on new devices will automatically recognize your linked license
+绑定成功后，系统会立即做两层校验：
 
-### What happens if the purchase email is different?
+1. 这个激活码是否属于 Agent for WhatsApp
+2. 当前订阅状态是否允许开启对应功能
 
-This is a very common scenario. The simple rule is:
-1. **Google Login** proves _who_ is using the extension right now.
-2. The **License Key** validates the purchase record.
+如果两层都通过，你会看到：
 
-If your Google email and Purchase email do not match, **that is perfectly fine**. The system allows you to bind any valid license key to your active Google session.
+- 套餐状态更新
+- 付费功能解锁
+- 后续登录时能自动识别已绑定的 License
 
----
+## 如果购买邮箱和 Google 邮箱不同怎么办
 
-## ⚠️ Subscription States
+这是允许的，也是很常见的情况。
 
-Paid features are governed by your subscription state, not just the static key. 
+规则很简单：
 
-Typical dashboard outcomes:
-- ✅ `active`: Full access to all premium features
-- 🔄 `past_due` or `paused`: Grace period access (update your payment method soon)
-- ❌ `expired` or `cancelled`: Paid features are blocked and downgrade to free functionality
+- Google 登录：确认当前是谁在用扩展
+- License Key：确认购买记录本身是否有效
 
----
+所以只要 License 本身有效、未过期、未超出设备上限，就可以绑定到你当前登录的 Google 账号上。
 
-## 💡 Best Practice
+## 订阅状态会如何影响功能
 
-For the lowest-friction setup:
-1. Log in with the Google account you intend to use **long term**
-2. Bind the license immediately after your very first login
-3. Avoid constantly switching between multiple Google identities on the same Chrome profile
+付费功能不仅取决于激活码本身，还取决于订阅状态。
 
-> [!WARNING] **Troubleshooting**
-> If you experience login or binding blocks, check the [Troubleshooting Guide](/docs/troubleshooting). Provide support with your visible error message and confirm whether your license is currently `active`.
+常见状态包括：
+
+- `active`：正常可用
+- `past_due` / `paused`：部分能力会进入宽限状态
+- `expired` / `cancelled`：高级功能会被锁定，回退到免费能力
+
+## 出现问题时先看什么
+
+如果你遇到“已登录但功能没开”这类问题，优先检查：
+
+- Google 登录是否成功
+- License 是否已绑定
+- 当前套餐状态是否为 `active`
+- 激活码是否过期
+
+如果问题仍未解决，继续查看 [故障排查](/zh/docs/troubleshooting)。

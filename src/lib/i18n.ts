@@ -27,20 +27,18 @@ export function switchLocalePath(pathname: string, locale: Locale): string {
 
 export const categoryLabels: Record<
   Locale,
-  Record<"Get Started" | "Core Workflows" | "Use Cases" | "Troubleshooting" | "Admin & Ops", string>
+  Record<"Get Started" | "Core Workflows" | "Use Cases" | "Troubleshooting", string>
 > = {
   en: {
     "Get Started": "Get Started",
     "Core Workflows": "Core Workflows",
     "Use Cases": "Use Cases",
     "Troubleshooting": "Troubleshooting",
-    "Admin & Ops": "Admin & Ops",
   },
   zh: {
     "Get Started": "快速开始",
     "Core Workflows": "核心工作流",
     "Use Cases": "使用场景",
     "Troubleshooting": "故障排查",
-    "Admin & Ops": "运维与管理",
   },
 };

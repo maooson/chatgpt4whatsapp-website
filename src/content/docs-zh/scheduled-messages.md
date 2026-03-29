@@ -1,65 +1,76 @@
 ---
 draft: false
-title: "Scheduled Messages"
-description: "Plan follow-ups ahead of time, reuse templates, and personalize messages with supported variables."
+title: "定时消息"
+description: "提前安排 WhatsApp 跟进消息，在正确时间自动发送，并支持模板与变量替换。"
 category: "Core Workflows"
 order: 3
 audience: ["sales", "operators"]
-updatedAt: "2026-03-28"
+updatedAt: "2026-03-29"
 related:
   - "message-templates"
   - "batch-sender"
   - "troubleshooting"
 ---
 
-## ⏳ What this feature does
+## 这项功能适合哪些任务
 
-**Scheduled Messages** let you queue a WhatsApp message to be sent later at a precise time. 
+定时消息最适合“你已经知道下一步要发什么，但不想现在立刻发送”的场景：
 
-This is especially useful for:
-- 🗓️ **Quote follow-ups**: "Hi, did you get a chance to review the pricing?"
-- 🌎 **Time-zone aware outreach**: Reaching clients when they are awake
-- ⏰ **Delayed reminders**: Gentle nudges for meetings or payments
-- 🌱 **Staged customer nurture**: Drip-feeding information over days
+- 报价后隔一天提醒
+- 按客户时区安排消息
+- 会议前提醒
+- 样品寄出后补跟进
 
----
+## 推荐工作流
 
-## 🔗 Shared Template Ecosystem
+<div class="docs-flow">
+  <div class="docs-flow-item">
+    <strong>1. 选择联系人</strong>
+    明确这条消息是发给谁，而不是先写一段没有对象的文案。
+  </div>
+  <div class="docs-flow-item">
+    <strong>2. 选择模板或直接输入</strong>
+    可复用模板，也可以编辑当前消息。
+  </div>
+  <div class="docs-flow-item">
+    <strong>3. 设定发送时间</strong>
+    结合时区、跟进节奏和业务场景安排发送。
+  </div>
+</div>
 
-Scheduled messages can use the exact same shared **Message Templates** as Batch Sender. 
+![定时消息模板选择](/img/screenshot-4.jpg)
+<div class="docs-shot-caption">定时消息与消息模板共用同一套模板库。</div>
 
-This creates **one reusable template system** instead of multiple disconnected template sources. You edit a template once, and it updates everywhere.
+## 变量替换
 
-![Select Template](/img/screenshot-4.jpg)
+定时消息支持的变量与消息模板一致：
 
----
+- `{{name}}`
+- `{{number}}`
 
-## 🧬 Dynamic Variables
+变量会在**真正发送时**根据当前联系人信息替换，而不是在创建任务时写死。
 
-Just like templates, Scheduled message content deeply supports variable replacement:
+## 什么时候适合用定时消息
 
-- `{{name}}`: The contact's name
-- `{{number}}`: The contact's phone number
+特别适合下面两类：
 
-The system dynamically resolves these values at the exact **send time** using the latest stored contact context.
+<div class="docs-grid-2">
+  <div class="docs-card">
+    <h4>固定时间点跟进</h4>
+    <p>例如报价发出后 24 小时提醒、样品寄出后 3 天回访。</p>
+  </div>
+  <div class="docs-card">
+    <h4>时区敏感场景</h4>
+    <p>客户在海外，避免你本地白天直接打扰到对方半夜。</p>
+  </div>
+</div>
 
----
+## 失败时优先检查什么
 
-## 🛠 Troubleshooting Scheduled Messages
+- 联系人是否已同步
+- 模板变量是否正确
+- 任务列表中的状态是成功还是失败
+- 手机和 WhatsApp Web 在发送时是否保持连接
 
-What to check if a scheduled message fails or feels wrong:
-
-1. **Contact Sync**: Does the contact actually exist in the local customer store?
-2. **Variable Validity**: Does the selected template use supported variables?
-3. **Queue Status**: Check if the task status in the pending list shows success or failure.
-
-> [!WARNING] **Device Connectivity**
-> WhatsApp Web relies on a stable connection to your phone. If your phone is completely disconnected from the internet at the scheduled time, the message may be delayed until the connection restores.
-
----
-
-## 💡 Best Practice
-
-Use scheduled messages for clear **next-step actions**, not for complex branching sequences.
-
-If a workflow depends on multiple decision paths (e.g., "If they reply A, do B; if they reply C, do D"), keep only the **first** message scheduled and let the subsequent steps depend on the user's actual reply. It is not an auto-responder!
+> [!WARNING]
+> 定时消息不是自动对话引擎。它适合发“第一条下一步动作”，后续是否继续推进，应该根据客户真实回复决定。

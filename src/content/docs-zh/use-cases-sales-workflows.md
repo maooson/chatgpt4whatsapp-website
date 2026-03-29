@@ -1,58 +1,88 @@
 ---
 draft: false
-title: "Sales Workflows for Small Teams"
-description: "Use Agent for WhatsApp as a lightweight sales copilot instead of a heavy CRM."
+title: "小团队销售工作流"
+description: "把 Agent for WhatsApp 当作轻量销售协作工具，而不是负担很重的 CRM。"
 category: "Use Cases"
 order: 1
 audience: ["sales", "operators"]
-updatedAt: "2026-03-28"
+updatedAt: "2026-03-29"
 related:
   - "lead-intelligence"
   - "message-templates"
   - "scheduled-messages"
 ---
 
-## 🎯 Best-fit Users
+## 哪类团队最适合
 
-Agent for WhatsApp operates as a highly specialized, lightweight sales copilot. It thrives where traditional CRMs collapse under data-entry overhead.
+Agent for WhatsApp 最适合这些场景：
 
-**This product is especially strong for:**
-- 🚢 **Exporters & Agencies**: Teams executing heavy WhatsApp-based sales
-- 👨‍💻 **Solo Founders**: Managing high-volume inbound leads without losing context
-- 📞 **Support Operators**: Running repetitive follow-up cycles across hundreds of chats
-- ⚡️ **Agile Teams**: Organizations that want structure without full CRM data-entry overhead
+- 外贸销售或海外客户沟通团队
+- 独立站卖家
+- 小型代理或服务团队
+- 需要高频 WhatsApp 跟进、但不想维护重型 CRM 的团队
 
----
+## 推荐的日常工作循环
 
-## 🔄 A Practical Operating Loop
+<div class="docs-flow">
+  <div class="docs-flow-item">
+    <strong>1. 同步联系人</strong>
+    先把现有 WhatsApp 联系人纳入侧边栏工作区。
+  </div>
+  <div class="docs-flow-item">
+    <strong>2. 做 AI 分析</strong>
+    用询盘分级和结构化线索信息判断优先级。
+  </div>
+  <div class="docs-flow-item">
+    <strong>3. 选择动作</strong>
+    立即回复、套用模板、定时跟进，或做批量触达。
+  </div>
+</div>
 
-The most effective daily workflow looks like this:
+## 为什么它不是 CRM
 
-1. **Capture**: Sync and identify contacts seamlessly inside the side panel
-2. **Qualify**: Let **AI Inquiry Qualification** instantly sort who matters and who is noise
-3. **Contextualize**: Review structured lead details (e.g., specific pain points, intent score)
-4. **Acknowledge**: Choose a high-converting **Message Template**
-5. **Execute**: Send the reply immediately, or schedule the follow-up for tomorrow
+这个产品刻意避免变成“字段很多、录入很重”的 CRM。
 
-```mermaid
-graph LR
-    A[Capture] --> B[AI Qualify]
-    B --> C[Review Context]
-    C --> D[Select Template]
-    D --> E[Execute Action]
-```
+对大多数小团队来说，真正要解决的是：
 
----
+- 今天该先跟谁
+- 这条消息该怎么发
+- 哪些客户已经沉默太久
 
-## 💡 What Customers Actually Care About
+因此产品优先强化的是：
 
-Modern WhatsApp sales teams do not want abstract memory silos. They want concrete outcomes:
+- 分级
+- 下一步动作
+- 模板复用
+- 跟进自动化
 
-- ✅ **Faster Replies**: Cutting average response time from hours to seconds
-- ✅ **Cleaner Follow-up**: Knowing exactly who dropped off and when
-- ✅ **Less Repeated Writing**: Never typing the same pricing pitch twice
-- ✅ **Better Lead Prioritization**: Highlighting hot leads instantly
-- ✅ **Fewer Missed Opportunities**: Ensuring every interaction ends with a next step
+而不是复杂的流程审批和大量人工录入。
 
-> [!TIP] **Action-Oriented Design**
-> That is precisely why Agent for WhatsApp presents insights in a way that leads directly to **action**—clicking a template, hitting schedule, or starting a batch.
+## 一套简单但有效的执行方式
+
+### 新客户
+
+- 先让 AI 做一次分级
+- 看“最近意图”和“下一步动作”
+- 用欢迎或询问信息模板回复
+
+### 已报价客户
+
+- 标记为重点跟进对象
+- 选择“报价后跟进”模板
+- 如需延后跟进，用定时消息安排 24 小时后提醒
+
+### 沉默客户
+
+- 筛选过去一段时间没有互动的人
+- 批量发送唤醒模板
+- 观察回复情况，再决定是否进入下一轮跟进
+
+## 成功使用这套产品的关键
+
+- 用模板替代重复文案
+- 用分级替代主观判断
+- 用下一步动作推动执行
+- 用定时消息防止漏跟进
+
+> [!TIP]
+> 如果你的团队每天还在手工翻聊天记录找客户，先把线索分级和模板体系跑起来，通常就能立刻看到效率提升。

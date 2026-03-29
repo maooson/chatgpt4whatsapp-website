@@ -24,7 +24,6 @@ const docsSchema = z.object({
     "Core Workflows",
     "Use Cases",
     "Troubleshooting",
-    "Admin & Ops",
   ]),
   order: z.number().default(100),
   audience: z

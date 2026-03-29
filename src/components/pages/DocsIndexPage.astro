@@ -9,7 +9,7 @@ import { getSiteCopy } from "@lib/site-copy";
 
 const { locale } = Astro.props as { locale: Locale };
 const copy = getSiteCopy(locale);
-const categories = ["Get Started", "Core Workflows", "Use Cases", "Troubleshooting", "Admin & Ops"] as const;
+const categories = ["Get Started", "Core Workflows", "Use Cases", "Troubleshooting"] as const;
 const collection = locale === "zh" ? "docs-zh" : "docs";
 const docs = await getCollection(collection, ({ data }) => !data.draft);
 
@@ -30,8 +30,8 @@ const featured = docs.filter((doc) =>
 const title = locale === "zh" ? "文档" : "Docs";
 const description =
   locale === "zh"
-    ? "围绕 Agent for WhatsApp 产品能力组织的帮助文档：安装、模板、批量发送、定时消息、线索洞察和运维排查。"
-    : "Product-aligned documentation for Agent for WhatsApp: setup, templates, batch sending, scheduled messages, lead intelligence, troubleshooting, and admin operations.";
+    ? "围绕 Agent for WhatsApp 产品能力组织的帮助文档：安装、模板、批量发送、定时消息、线索洞察和故障排查。"
+    : "Product-aligned documentation for Agent for WhatsApp: setup, templates, batch sending, scheduled messages, lead intelligence, and troubleshooting.";
 ---
 
 <Layout title={title} description={description} locale={locale}>

@@ -1,80 +1,88 @@
 ---
 draft: false
-title: "Message Templates"
-description: "Create reusable message templates, copy preset scripts, and apply templates in batch sender and scheduled messages."
+title: "消息模板"
+description: "统一维护常用话术，在批量发送、定时消息和日常回复中重复复用。"
 category: "Core Workflows"
 order: 1
 audience: ["new-users", "sales"]
-updatedAt: "2026-03-28"
+updatedAt: "2026-03-29"
 related:
   - "batch-sender"
   - "scheduled-messages"
   - "use-cases-sales-workflows"
 ---
 
-## What this feature does
+## 这项功能解决什么问题
 
-**Message Templates** are reusable reply blocks designed for common sales and support scenarios. They drastically reduce repetitive writing and make your messaging approach consistently professional across all workflows.
+消息模板的目标很直接：  
+**不要再重复写同一类 WhatsApp 话术。**
 
----
+它适合用在这些高频场景：
 
-## 🔁 Where templates can be used
+- 首次触达
+- 报价后跟进
+- 样品确认
+- 付款提醒
+- 沉默客户激活
+- 售后回访
 
-Templates are a central piece of your workspace and are currently shared across multiple core modules:
+## 一套模板，多处复用
 
-- 📝 **The Message Template Manager** (Create and edit)
-- 🚀 **Batch Sender** (Broadcast to multiple contacts)
-- ⏱️ **Scheduled Messages** (Delayed follow-ups)
+消息模板不是孤立功能，而是被多个核心模块共用：
 
-That means you only need to create and maintain your templates **once**.
+<div class="docs-flow">
+  <div class="docs-flow-item">
+    <strong>消息模板库</strong>
+    统一创建、编辑、管理可复用话术。
+  </div>
+  <div class="docs-flow-item">
+    <strong>批量发送</strong>
+    直接选择模板，对特定客户分组发起触达。
+  </div>
+  <div class="docs-flow-item">
+    <strong>定时消息</strong>
+    选择模板并安排稍后发送，实现跟进自动化。
+  </div>
+</div>
 
-```mermaid
-graph TD
-    A[Template Library] --> B(Batch Sender)
-    A --> C(Scheduled Messages)
-    A --> D(1-on-1 Replies)
-```
+![消息模板管理界面](/img/screenshot-1.png)
+<div class="docs-shot-caption">模板库是统一入口，后续在批量发送和定时消息中都会直接复用。</div>
 
-![Template Manager Preview](/img/screenshot-1.png)
+## 变量支持
 
----
+模板支持动态变量：
 
-## 🎯 Typical template use cases
+- `{{name}}`：联系人名称
+- `{{number}}`：联系人手机号
 
-Here are some of the most effective ways our users leverage templates:
+这些变量会在真正发送时根据当前联系人上下文自动替换，不需要手动修改每条消息。
 
-- **First-touch outreach**: Standardizing the opening pitch
-- **Quote follow-up**: Checking in after sending pricing
-- **Sample confirmation**: Confirming address and shipping
-- **Payment reminder**: Polite prompts for unpaid invoices
-- **Reactivation**: Re-engaging silent or dead leads
-- **After-sales**: Automated follow-up post delivery
+## 推荐写法
 
-> [!TIP] **Preset script library**
-> Don't want to write from scratch? The product includes a **preset script library**. You can immediately copy a proven script, save it as a personal template, and adapt it to your own sales tone.
+高质量模板通常只做一件事：
 
----
+1. 打开对话
+2. 请求某个关键信息
+3. 推动下一步动作
 
-## 🧬 Dynamic Variables
+比起写一大段完整销售稿，更建议保持：
 
-For deep personalization at scale, template content supports dynamic variables:
+- 句子短
+- 目的单一
+- 像真人在 WhatsApp 里说话
 
-- `{{name}}`: Injects the contact's saved name
-- `{{number}}`: Injects their WhatsApp phone number
+## 模板库怎么用得更高效
 
-These variables are **automatically resolved** at send time, provided the workflow has enough customer context available.
+建议按场景管理模板，而不是按语言堆很多版本。
 
-![Variables in Action](/img/screenshot-2.jpg)
+例如：
 
----
+- 首次欢迎
+- 报价后跟进
+- 样品推进
+- 沉默客户唤醒
 
-## 💡 Best Practice
+然后再在模板正文里根据需要调整语气和变量。
 
-Keep templates **short** and **scenario-specific**. A strong template usually does only _one_ thing:
-
-1. Reopen a conversation
-2. Request missing information
-3. Push a specific next step
-
-> [!WARNING] **Common Mistake**
-> A template should **not** try to close every objection in one giant message. Long walls of text perform poorly on WhatsApp. Keep it conversational!
+> [!WARNING]
+> 不要把所有 objections 都塞进一条模板里。WhatsApp 上长篇大论的效果通常很差，短消息更容易获得回复。

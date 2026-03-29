@@ -6,7 +6,8 @@ import { getSiteCopy } from "@lib/site-copy";
 const { locale = "en" } = Astro.props as { locale?: Locale };
 const copy = getSiteCopy(locale);
 const features = copy.features.cards.map((card, index) => ({
-  icon: ["mdi:robot-happy", "mdi:account-group", "mdi:send-clock"][index],
+  // Use a single professional icon set to keep visual language consistent.
+  icon: ["mdi:message-text-outline", "mdi:account-multiple-outline", "mdi:workflow"][index],
   ...card,
 }));
 ---
@@ -31,7 +32,7 @@ const features = copy.features.cards.map((card, index) => ({
         <ul class="mt-4 space-y-2">
           {f.items.map((item) => (
             <li class="flex items-center gap-2 text-sm text-[var(--ink-700)]">
-              <Icon name="mdi:check-circle" class="h-4 w-4 shrink-0 text-[var(--brand-500)]" />
+              <Icon name="mdi:check-circle" class="h-4 w-4 shrink-0 text-[var(--brand-600)]" />
               <span>{item}</span>
             </li>
           ))}

@@ -9,7 +9,6 @@ updatedAt: "2026-03-28"
 related:
   - "quick-start"
   - "troubleshooting"
-  - "license-and-webhook-ops"
 ---
 
 ## 🔑 Core Concepts

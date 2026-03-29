@@ -1,71 +1,79 @@
 ---
 draft: false
-title: "Troubleshooting"
-description: "Resolve the most common issues with login, license binding, connectors, scheduled messages, and paid feature access."
+title: "故障排查"
+description: "处理最常见的登录、绑定、Connector、定时消息和付费功能异常问题。"
 category: "Troubleshooting"
 order: 1
 audience: ["new-users", "operators", "admins"]
-updatedAt: "2026-03-28"
+updatedAt: "2026-03-29"
 related:
   - "google-login-and-license"
   - "scheduled-messages"
-  - "license-and-webhook-ops"
 ---
 
-## 🛑 Google login fails
+## 登录失败
 
-First, verify that Google authentication completed successfully. 
+如果 Google 登录无法完成，优先检查：
 
-**Checklist:**
-- [ ] Did the browser automatically block third-party cookies or pop-ups?
-- [ ] Is your browser session stale? (Try hard-refreshing Chrome)
-- [ ] Are you attempting to authorize a different Google profile than the one actively signed into the browser?
+- 浏览器是否拦截了弹窗
+- 三方 Cookie 是否被禁用
+- 当前 Chrome Profile 是否切错 Google 账号
+- 页面是否停留在旧的缓存状态
 
----
+建议动作：
 
-## 🔑 License binding fails
+1. 刷新 WhatsApp Web
+2. 重新打开侧边栏
+3. 再发起一次 Google 登录
 
-If the license key is rejected during binding:
+## 绑定激活码失败
 
-**Checklist:**
-- [ ] Is the license key valid and copied without leading/trailing spaces?
-- [ ] Does the bound customer email perfectly match the original purchase record?
-- [ ] Has the license expired?
-- [ ] Has the activation device limit been exhausted on other computers?
+优先核查这几个点：
 
-> [!TIP] **Device Limits**
-> You can manage and revoke active devices directly from your customer portal.
+- 激活码是否完整复制
+- 是否有多余空格
+- 激活码是否已过期
+- 设备激活数量是否达到上限
 
----
+如果你购买时使用的邮箱和当前 Google 邮箱不同，也不一定是问题。只要 License 本身有效，仍然可以绑定。
 
-## 🔒 Paid features are suddenly locked
+## 付费功能突然被锁
 
-Paid features are controlled dynamically by the backend.
+这类问题通常与以下因素有关：
 
-**Checklist:**
-- [ ] **Expiry**: Did the license pass its expiration date?
-- [ ] **Subscription State**: Did your latest recurring payment fail? (Check your bank / Lemon Squeezy portal)
-- [ ] **Status**: Check if your backend entitlement is returning a `past_due` or `paused` status.
+- 订阅已到期
+- 最近一次扣款失败
+- 订阅状态变成 `past_due`、`paused` 或 `expired`
+- 后端还没有同步到最新订阅状态
 
----
+这时建议先检查账号页和套餐状态，而不是直接重装扩展。
 
-## 🔌 Connector errors
+## AI 功能无结果或报错
 
-If AI assistance, text generation, or lead analysis fails:
+如果 AI 分级、结构化线索或辅助回复失败，通常优先检查：
 
-**Checklist:**
-- [ ] **API Key**: Is the key valid and funded? (Check your OpenAI/Groq dashboard)
-- [ ] **Model Name**: Did the provider deprecate or rename the model you selected?
-- [ ] **Network**: Is a proxy or strict corporate firewall blocking external API requests?
-- [ ] **Gating**: Does your Agent for WhatsApp plan allow this specific connector type?
+- API Key 是否正确
+- 账户是否有可用额度
+- 模型名称是否仍然有效
+- 当前套餐是否支持该 Connector
+- 公司网络是否拦截外部 API
 
----
+## 定时消息没有发出去
 
-## 🛠 What to collect before contacting support
+先看任务列表中的状态，再检查：
 
-Our support team can help you _much_ faster if you provide the following details upfront:
+- 联系人是否存在于本地客户库
+- 模板里的变量是否正确
+- 发送时手机和 WhatsApp Web 是否在线
 
-1. **The exact visible error message** (Copy the red text)
-2. **Screenshots** or short screen recordings of the failing workflow
-3. **Scope**: Does this affect one user or everyone on your team?
-4. **Category**: Specify if it is a Login issue, Entitlement issue, or Workflow issue.
+## 联系支持前请准备什么
+
+为了更快定位问题，建议提前提供：
+
+1. 具体报错文案
+2. 失败页面截图
+3. 问题影响范围：一个账号还是所有账号
+4. 问题类型：登录、绑定、AI、发送、权限
+
+> [!IMPORTANT]
+> 不要只说“不能用了”。把出错页面、时间点和具体操作步骤一起发给支持，排查速度会快很多。

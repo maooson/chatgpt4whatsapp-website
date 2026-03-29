@@ -7,7 +7,8 @@ const { locale = "en" } = Astro.props as { locale?: Locale };
 const copy = getSiteCopy(locale);
 const steps = copy.how.steps.map((step, index) => ({
   ...step,
-  icon: ["mdi:download-circle", "mdi:link-variant", "mdi:rocket-launch"][index],
+  // Keep a consistent icon style across the homepage.
+  icon: ["mdi:puzzle-outline", "mdi:link-variant", "mdi:rocket-launch-outline"][index],
 }));
 ---
 

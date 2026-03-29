@@ -16,7 +16,6 @@ const categories = [
   "Core Workflows",
   "Use Cases",
   "Troubleshooting",
-  "Admin & Ops",
 ];
 const allDocs = await getCollection(docsCollection, ({ data }) => !data.draft);
 allDocs.sort((a, b) => {
@@ -85,14 +84,14 @@ const currentSlug = getDocSlug(entry);
           </span>
         </div>
 
-        <h1 class="max-w-4xl text-3xl font-bold tracking-tight text-[var(--ink-900)] md:text-5xl">
+        <h1 class="max-w-4xl text-xl font-bold tracking-tight text-[var(--ink-900)] md:text-3xl">
           {entry.data.title}
         </h1>
-        <p class="mt-4 max-w-3xl text-lg leading-8 text-[var(--ink-700)]">
+        <p class="mt-4 max-w-3xl text-sm leading-7 text-[var(--ink-700)] md:text-base md:leading-8">
           {entry.data.description}
         </p>
 
-        <div class="docs-prose mt-10 max-w-none">
+        <div class="docs-prose mt-10 max-w-4xl">
           <slot />
         </div>
 
@@ -117,42 +116,84 @@ const currentSlug = getDocSlug(entry);
     </div>
   </Container>
 
-  <style>
+  <!-- Global styles (avoid scoped CSS so markdown list/title styles always apply) -->
+  <style is:global>
     .docs-prose {
       color: #334155;
-      line-height: 1.85;
-      font-size: 1.05rem;
+      line-height: 1.78;
+      font-size: 0.95rem;
     }
 
     .docs-prose h2 {
-      margin-top: 2.5rem;
+      margin-top: 3rem;
       margin-bottom: 1rem;
-      font-size: 1.625rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid #e2e8f0;
+      font-size: 1.45rem;
       font-weight: 700;
       color: #0f172a;
     }
 
     .docs-prose h3 {
-      margin-top: 1.75rem;
-      margin-bottom: 0.75rem;
-      font-size: 1.15rem;
+      margin-top: 2rem;
+      margin-bottom: 0.9rem;
+      font-size: 1.05rem;
       font-weight: 700;
       color: #1e293b;
     }
 
+    .docs-prose h4 {
+      margin-top: 1.6rem;
+      margin-bottom: 0.65rem;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .docs-prose h5 {
+      margin-top: 1.4rem;
+      margin-bottom: 0.55rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #475569;
+    }
+
+    .docs-prose h6 {
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #64748b;
+    }
+
     .docs-prose p,
     .docs-prose ul,
-    .docs-prose ol {
+    .docs-prose ol,
+    .docs-prose blockquote {
       margin: 0.9rem 0;
     }
 
     .docs-prose ul,
     .docs-prose ol {
-      padding-left: 1.25rem;
+      padding-left: 1.3rem;
+    }
+
+    .docs-prose ul {
+      list-style: disc;
+    }
+
+    .docs-prose ol {
+      list-style: decimal;
     }
 
     .docs-prose li {
-      margin: 0.4rem 0;
+      margin: 0.5rem 0;
+    }
+
+    .docs-prose li::marker {
+      color: #94a3b8;
+      font-weight: 600;
     }
 
     .docs-prose code {
@@ -171,6 +212,86 @@ const currentSlug = getDocSlug(entry);
 
     .docs-prose strong {
       color: #0f172a;
+    }
+
+    .docs-prose hr {
+      margin: 2rem 0;
+      border: 0;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .docs-prose blockquote {
+      border-left: 3px solid #22c55e;
+      border-radius: 0 1rem 1rem 0;
+      background: #f8fafc;
+      padding: 1rem 1.1rem;
+      color: #475569;
+    }
+
+    .docs-prose img {
+      margin: 1.2rem 0;
+      border: 1px solid #e2e8f0;
+      border-radius: 1rem;
+      background: #fff;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+    }
+
+    .docs-prose pre {
+      overflow-x: auto;
+      border: 1px solid #e2e8f0;
+      border-radius: 1rem;
+      background: #0f172a;
+      padding: 1rem 1.1rem;
+      color: #e2e8f0;
+    }
+
+    .docs-prose .docs-flow {
+      display: grid;
+      gap: 0.75rem;
+      margin: 1.25rem 0;
+    }
+
+    .docs-prose .docs-flow-item {
+      border: 1px solid #e2e8f0;
+      border-radius: 1rem;
+      background: #fff;
+      padding: 1rem 1.1rem;
+    }
+
+    .docs-prose .docs-flow-item strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: #0f172a;
+    }
+
+    .docs-prose .docs-shot-caption {
+      margin-top: -0.25rem;
+      font-size: 0.92rem;
+      color: #64748b;
+    }
+
+    .docs-prose .docs-grid-2 {
+      display: grid;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .docs-prose .docs-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 1rem;
+      background: #fff;
+      padding: 1rem 1.1rem;
+    }
+
+    .docs-prose .docs-card h4,
+    .docs-prose .docs-card p {
+      margin: 0;
+    }
+
+    @media (min-width: 768px) {
+      .docs-prose .docs-grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
   </style>
 </Layout>
