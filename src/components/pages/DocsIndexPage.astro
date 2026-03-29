@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Container from "@components/container.astro";
 import Layout from "@layouts/Layout.astro";
+import { getDocSlug } from "@lib/docs";
 import type { Locale } from "@lib/i18n";
 import { categoryLabels, localizePath } from "@lib/i18n";
 import { getSiteCopy } from "@lib/site-copy";
@@ -23,7 +24,7 @@ const grouped = categories.map((category) => ({
 }));
 
 const featured = docs.filter((doc) =>
-  ["quick-start", "message-templates", "batch-sender", "scheduled-messages"].includes(doc.slug)
+  ["quick-start", "message-templates", "batch-sender", "scheduled-messages"].includes(getDocSlug(doc))
 );
 
 const title = locale === "zh" ? "文档" : "Docs";
@@ -46,7 +47,7 @@ const description =
         {
           featured.map((doc) => (
             <a
-              href={localizePath(`/docs/${doc.slug}`, locale)}
+              href={localizePath(`/docs/${getDocSlug(doc)}`, locale)}
               class="rounded-2xl border border-[var(--line-soft)] bg-white p-5 transition hover:bg-white">
               <div class="eyebrow !text-[0.68rem] !tracking-[0.12em]">{categoryLabels[locale][doc.data.category]}</div>
               <div class="mt-2 text-lg font-semibold text-[var(--ink-900)]">{doc.data.title}</div>
@@ -73,7 +74,7 @@ const description =
               <div class="mt-6 space-y-3">
                 {docs.map((doc) => (
                   <a
-                    href={localizePath(`/docs/${doc.slug}`, locale)}
+                    href={localizePath(`/docs/${getDocSlug(doc)}`, locale)}
                     class="block rounded-xl bg-white px-4 py-4 transition hover:text-[var(--ink-900)]">
                     <div class="text-base font-semibold text-[var(--ink-900)]">{doc.data.title}</div>
                     <div class="mt-1 text-sm leading-6 text-[var(--ink-700)]">{doc.data.description}</div>
